@@ -11,7 +11,7 @@ package hn.uth.bd2.database;
  */
 public class PruebaConexion {
 //        public static void main(String[] args) {
-////        Conexion con = new Conexion(); //ESTO SE HACE PRIMERO 
+//        Conexion con = new Conexion(); //ESTO SE HACE PRIMERO 
 //        Conexion con = Conexion.getInstancia(); //ESTO SE HACE DESPUES
 //        con.conectar();
 //        if (con.cadena!=null) {
