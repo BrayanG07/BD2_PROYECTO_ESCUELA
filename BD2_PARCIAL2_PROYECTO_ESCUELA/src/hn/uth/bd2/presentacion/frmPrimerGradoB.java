@@ -8,7 +8,6 @@ package hn.uth.bd2.presentacion;
 import hn.uth.bd2.negocio.GradoCalificacionesControl;
 import hn.uth.bd2.objetos.AsignaturaCalificacion;
 import hn.uth.bd2.objetos.ProfesoresCalificacion;
-import java.sql.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -17,7 +16,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Buddys
  */
-public class frmPrimerGrado extends javax.swing.JInternalFrame {
+public class frmPrimerGradoB extends javax.swing.JInternalFrame {
 
     private final GradoCalificacionesControl CONTROL;
     private String accion;
@@ -25,7 +24,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmPrimerGrado
      */
-    public frmPrimerGrado() {
+    public frmPrimerGradoB() {
         initComponents();
         this.CONTROL = new GradoCalificacionesControl();
         this.listarAlumnos();
@@ -38,20 +37,20 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     }
 
     private void listarAlumnos() {
-        tablaAlumnos.setModel(this.CONTROL.listarAlumnosGrado("Primer Grado", "A"));
+        tablaAlumnos.setModel(this.CONTROL.listarAlumnosGrado("Primer Grado", "B"));
         TableRowSorter control = new TableRowSorter(tablaAlumnos.getModel());
         tablaAlumnos.setRowSorter(control);
     }
 
     private void listarAlumnosCalif() {
-        tablaCalificados.setModel(this.CONTROL.listarAlumnosCalificados("Primer Grado", "A"));
+        tablaCalificados.setModel(this.CONTROL.listarAlumnosCalificados("Primer Grado", "B"));
         TableRowSorter control1 = new TableRowSorter(tablaCalificados.getModel());
         tablaCalificados.setRowSorter(control1);
         this.ocultarColumnas();
     }
 
     private void cargarCategorias() {
-        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Primer Grado", "A");
+        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Primer Grado", "B");
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);
@@ -478,7 +477,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
-        
     }//GEN-LAST:event_btnCalificarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
