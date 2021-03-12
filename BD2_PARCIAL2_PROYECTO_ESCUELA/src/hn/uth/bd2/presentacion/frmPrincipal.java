@@ -5,6 +5,9 @@
  */
 package hn.uth.bd2.presentacion;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author Buddys
@@ -17,7 +20,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     public frmPrincipal() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +29,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.white);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -39,36 +48,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
+        jMenu23 = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu20 = new javax.swing.JMenu();
-        jMenu21 = new javax.swing.JMenu();
-        jMenu22 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
-        jMenu11 = new javax.swing.JMenu();
-        jMenu12 = new javax.swing.JMenu();
-        jMenu13 = new javax.swing.JMenu();
-        jMenu14 = new javax.swing.JMenu();
-        jMenu15 = new javax.swing.JMenu();
-        jMenu16 = new javax.swing.JMenu();
-        jMenu17 = new javax.swing.JMenu();
-        jMenu18 = new javax.swing.JMenu();
-        jMenu19 = new javax.swing.JMenu();
+        jMenu26 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        menuBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBar.setPreferredSize(new java.awt.Dimension(199, 35));
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
+        fileMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
@@ -96,6 +90,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         editMenu.setMnemonic('e');
         editMenu.setText("Edit");
+        editMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
@@ -115,8 +110,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
+        jMenu23.setText("Grados");
+        jMenu23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenu23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu23ActionPerformed(evt);
+            }
+        });
+        menuBar.add(jMenu23);
+
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
+        helpMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
@@ -128,79 +133,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         menuBar.add(helpMenu);
 
-        jMenu1.setText("Grados");
+        jMenu26.setText("Primer Grado");
+        jMenu26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenu20.setText("Preparatoria");
+        jMenuItem2.setText("Seccion A");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu26.add(jMenuItem2);
 
-        jMenu21.setText("Seccion A");
-        jMenu20.add(jMenu21);
-
-        jMenu22.setText("Seccion B");
-        jMenu20.add(jMenu22);
-
-        jMenu1.add(jMenu20);
-
-        jMenu2.setText("Primer Grado");
-
-        jMenu3.setText("Seccion A");
-        jMenu2.add(jMenu3);
-
-        jMenu4.setText("Seccion B");
-        jMenu2.add(jMenu4);
-
-        jMenu1.add(jMenu2);
-
-        jMenu5.setText("Segundo Grado");
-
-        jMenu6.setText("Seccion A");
-        jMenu5.add(jMenu6);
-
-        jMenu7.setText("Seccion B");
-        jMenu5.add(jMenu7);
-
-        jMenu1.add(jMenu5);
-
-        jMenu8.setText("Tercer Grado");
-
-        jMenu9.setText("Seccion A");
-        jMenu8.add(jMenu9);
-
-        jMenu10.setText("Seccion B");
-        jMenu8.add(jMenu10);
-
-        jMenu1.add(jMenu8);
-
-        jMenu11.setText("Cuarto Grado");
-
-        jMenu12.setText("Seccion A");
-        jMenu11.add(jMenu12);
-
-        jMenu13.setText("Seccion B");
-        jMenu11.add(jMenu13);
-
-        jMenu1.add(jMenu11);
-
-        jMenu14.setText("Quinto Grado");
-
-        jMenu15.setText("Seccion A");
-        jMenu14.add(jMenu15);
-
-        jMenu16.setText("Seccion B");
-        jMenu14.add(jMenu16);
-
-        jMenu1.add(jMenu14);
-
-        jMenu17.setText("Sexto Grado");
-
-        jMenu18.setText("Seccion A");
-        jMenu17.add(jMenu18);
-
-        jMenu19.setText("Seccion B");
-        jMenu17.add(jMenu19);
-
-        jMenu1.add(jMenu17);
-
-        menuBar.add(jMenu1);
+        menuBar.add(jMenu26);
 
         setJMenuBar(menuBar);
 
@@ -208,11 +152,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
 
         pack();
@@ -221,6 +165,17 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void jMenu23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu23ActionPerformed
+
+    }//GEN-LAST:event_jMenu23ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        FrmPrimerGrado frm = new FrmPrimerGrado();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,33 +218,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
-    private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu15;
-    private javax.swing.JMenu jMenu16;
-    private javax.swing.JMenu jMenu17;
-    private javax.swing.JMenu jMenu18;
-    private javax.swing.JMenu jMenu19;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu20;
-    private javax.swing.JMenu jMenu21;
-    private javax.swing.JMenu jMenu22;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
+    private javax.swing.JMenu jMenu23;
+    private javax.swing.JMenu jMenu26;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

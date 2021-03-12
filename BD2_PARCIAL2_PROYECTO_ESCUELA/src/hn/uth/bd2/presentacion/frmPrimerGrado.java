@@ -5,19 +5,30 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.negocio.GradoCalificacionesControl;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Buddys
  */
-public class frmPrimerGrado extends javax.swing.JInternalFrame {
-
+public class FrmPrimerGrado extends javax.swing.JInternalFrame {
+    private final GradoCalificacionesControl CONTROL;
     /**
      * Creates new form frmPrimerGrado
      */
-    public frmPrimerGrado() {
+    public FrmPrimerGrado() {
         initComponents();
+        this.CONTROL = new GradoCalificacionesControl();
+        this.listarAlumnos();
     }
 
+    private void listarAlumnos() {
+        tablaAlumnos.setModel(this.CONTROL.listarAlumnosGrado("Primer Grado", "A"));
+        TableRowSorter control = new TableRowSorter(tablaAlumnos.getModel());
+        tablaAlumnos.setRowSorter(control);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +46,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAlumnos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -98,7 +109,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Alumnos"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,7 +117,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaAlumnos);
 
         jButton2.setText("Calificar");
 
@@ -365,7 +376,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -373,5 +383,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tablaAlumnos;
     // End of variables declaration//GEN-END:variables
 }
