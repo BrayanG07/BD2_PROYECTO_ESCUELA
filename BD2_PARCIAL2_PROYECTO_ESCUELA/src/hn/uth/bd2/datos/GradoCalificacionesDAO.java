@@ -110,7 +110,7 @@ public class GradoCalificacionesDAO {
     public boolean insertar(GradoCalificaiones objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call INSERTAR_CALIFICACION(?,?,?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call INSERTAR_CALIFICACION(?,?,?,?,?,?,?,?,?)}");
             insertando.setDouble(1, objeto.getNota1());
             insertando.setDouble(2, objeto.getNota2());
             insertando.setDouble(3, objeto.getNota3());
@@ -118,16 +118,18 @@ public class GradoCalificacionesDAO {
             insertando.setInt(5, objeto.getIdAlumno());
             insertando.setInt(6, objeto.getIdAsignatura());
             insertando.setInt(7, objeto.getIdProfesor());
-            insertando.registerOutParameter(8, Types.VARCHAR);
+            insertando.registerOutParameter(8, OracleTypes.INTEGER);
+            insertando.registerOutParameter(9, OracleTypes.VARCHAR);
 
             insertando.execute();
-            System.out.println("Despues del execute");
             respuesta = true;
 
-            //if (!insertando.getString(8).equals("")) {
-                //respuesta = false;
-                //JOptionPane.showMessageDialog(null, "" + insertando.getString(8), null, JOptionPane.ERROR_MESSAGE);
-            //} 
+            if (insertando.getInt(8) == 1) {
+                respuesta = false;
+                JOptionPane.showMessageDialog(null, insertando.getString(9), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Alumno calificado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
+            }
 
             insertando.close();
         } catch (SQLException e) {

@@ -435,10 +435,37 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         String respuesta;
+        if (txtNota1.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar una nota del primer parical, es obligatorio.", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
+            txtNota1.requestFocus();
+            return;
+        }
+        if (txtNota2.getText().length() == 0 ) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar una nota del segundo parcial", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
+            txtNota2.requestFocus();
+            return;
+        }
+        if (txtNota3.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar una nota del tercer parcial", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
+            txtNota3.requestFocus();
+            return;
+        }
+        if (txtNota4.getText().length() == 0 ) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar una nota del cuarto parcial", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
+            txtNota4.requestFocus();
+            return;
+        }
+        double nota1 = Double.parseDouble(txtNota1.getText());
+        double nota2 = Double.parseDouble(txtNota2.getText());
+        double nota3 = Double.parseDouble(txtNota3.getText());
+        double nota4 = Double.parseDouble(txtNota4.getText());
+        if (nota1 > 100 || nota2 > 100 || nota3 > 100 || nota4 > 100) {
+            JOptionPane.showMessageDialog(this, "Las notas ingresadas no deben ser mayor a 100, es obligatorio.", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
         AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
-        respuesta = this.CONTROL.insertar(Double.parseDouble(txtNota1.getText()), Double.parseDouble(txtNota2.getText()), Double.parseDouble(txtNota3.getText()), Double.parseDouble(txtNota4.getText()), Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
-        System.out.println("Despues de this.CONTROL.actualizar");
+        respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
         if (respuesta.equals("OK")) {
             this.limpiar();
             tabGeneral.setEnabledAt(1, false);

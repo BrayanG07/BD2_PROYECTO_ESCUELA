@@ -74,20 +74,15 @@ public class GradoCalificacionesControl {
         respuesta = "error";
         GradoCalificaiones gc = new GradoCalificaiones();
         gc.setNota1(nota1);
-        System.out.println("Despues set nota1");
         gc.setNota2(nota2);
         gc.setNota3(nota3);
         gc.setNota4(nota4);
         gc.setIdAlumno(idAlumno);
-        System.out.println("Despues de los id");
         gc.setIdAsignatura(idAsignatura);
         gc.setIdProfesor(idProfesor);
-        System.out.println("Antes de la validacion");
         if (DATOS.insertar(gc)) {
-            System.out.println("Dentro de OK");
             return "OK";
         }
-        System.out.println("LLego al final");
         return respuesta;
     }
 }
