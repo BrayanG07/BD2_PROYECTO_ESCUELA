@@ -10,7 +10,6 @@ package hn.uth.bd2.objetos;
  * @author Buddys
  */
 public class GradoCalificaiones {
-
     private int idCalificacion;
     private double nota1;
     private double nota2;
@@ -31,6 +30,22 @@ public class GradoCalificaiones {
         this.idAlumno = idAlumno;
         this.nombreAlumno = nombreAlumno;
         this.rtnAlumno = rtnAlumno;
+    }
+
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+
+    public String getNombreProfesor() {
+        return nombreProfesor;
+    }
+
+    public void setNombreProfesor(String nombreProfesor) {
+        this.nombreProfesor = nombreProfesor;
     }
 
     public int getIdCalificacion() {
@@ -117,7 +132,5 @@ public class GradoCalificaiones {
     public String toString() {
         return "GradoCalificaiones{" + "idCalificacion=" + idCalificacion + ", nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + ", nota4=" + nota4 + ", idAlumno=" + idAlumno + ", nombreAlumno=" + nombreAlumno + ", idProfesor=" + idProfesor + ", nombreProfesor=" + nombreProfesor + ", rtnAlumno=" + rtnAlumno + ", idAsignatura=" + idAsignatura + ", nombreAsignatura=" + nombreAsignatura + '}';
     }
-
-    
 
 }
