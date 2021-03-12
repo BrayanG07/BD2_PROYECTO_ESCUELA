@@ -12,10 +12,8 @@ import hn.uth.bd2.objetos.ProfesoresCalificacion;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import oracle.jdbc.internal.OracleTypes;
 
@@ -70,7 +68,7 @@ public class GradoCalificacionesDAO {
             
             rs = (ResultSet) insertando.getObject(3);
             while (rs.next()) {
-                listaCalif.add(new GradoCalificaiones(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),rs.getString(7),rs.getString(8)));
+                listaCalif.add(new GradoCalificaiones(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getDouble(6),rs.getDouble(7),rs.getDouble(8),rs.getDouble(9),rs.getString(10),rs.getString(11)));
             }
             insertando.close();
             rs.close();
@@ -156,6 +154,41 @@ public class GradoCalificacionesDAO {
                 JOptionPane.showMessageDialog(null, insertando.getString(9), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Alumno calificado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            insertando.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            insertando = null;
+            CON.cerrarConexion();
+        }
+        return respuesta;
+    }
+    
+    public boolean actualizar(GradoCalificaiones objeto) {
+        respuesta = false;
+        try {
+            insertando = CON.conectar().prepareCall("{call ACTUALIZAR_CALIFICACION(?,?,?,?,?,?,?,?,?,?)}");
+            insertando.setInt(1, objeto.getIdCalificacion());
+            insertando.setDouble(2, objeto.getNota1());
+            insertando.setDouble(3, objeto.getNota2());
+            insertando.setDouble(4, objeto.getNota3());
+            insertando.setDouble(5, objeto.getNota4());
+            insertando.setInt(6, objeto.getIdAlumno());
+            insertando.setInt(7, objeto.getIdAsignatura());
+            insertando.setInt(8, objeto.getIdProfesor());
+            insertando.registerOutParameter(9, OracleTypes.INTEGER);
+            insertando.registerOutParameter(10, OracleTypes.VARCHAR);
+
+            insertando.execute();
+            respuesta = true;
+
+            if (insertando.getInt(9) == 1) {
+                respuesta = false;
+                JOptionPane.showMessageDialog(null, insertando.getString(10), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Calificacion actualizada correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
 
             insertando.close();

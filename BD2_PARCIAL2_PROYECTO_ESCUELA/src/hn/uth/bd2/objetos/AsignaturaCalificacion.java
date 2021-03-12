@@ -43,8 +43,9 @@ public class AsignaturaCalificacion {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.nombreAsignatura);
+        int hash = 3;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.nombreAsignatura);
         return hash;
     }
 
@@ -60,9 +61,14 @@ public class AsignaturaCalificacion {
             return false;
         }
         final AsignaturaCalificacion other = (AsignaturaCalificacion) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nombreAsignatura, other.nombreAsignatura)) {
             return false;
         }
         return true;
     }
+
+    
 }

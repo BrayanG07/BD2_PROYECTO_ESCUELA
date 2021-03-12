@@ -43,8 +43,9 @@ public class ProfesoresCalificacion {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.nombreProfesores);
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.nombreProfesores);
         return hash;
     }
 
@@ -60,9 +61,14 @@ public class ProfesoresCalificacion {
             return false;
         }
         final ProfesoresCalificacion other = (ProfesoresCalificacion) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nombreProfesores, other.nombreProfesores)) {
             return false;
         }
         return true;
     }
+
+    
 }
