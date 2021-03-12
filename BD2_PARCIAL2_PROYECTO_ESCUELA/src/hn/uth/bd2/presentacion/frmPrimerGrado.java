@@ -27,6 +27,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
         initComponents();
         this.CONTROL = new GradoCalificacionesControl();
         this.listarAlumnos();
+        this.listarAlumnosCalif();
         this.cargarCategorias();
         tabGeneral.setEnabledAt(1, false);
     }
@@ -35,6 +36,12 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
         tablaAlumnos.setModel(this.CONTROL.listarAlumnosGrado("Primer Grado", "A"));
         TableRowSorter control = new TableRowSorter(tablaAlumnos.getModel());
         tablaAlumnos.setRowSorter(control);
+    }
+
+    private void listarAlumnosCalif() {
+        tablaCalificados.setModel(this.CONTROL.listarAlumnosCalificados("Primer Grado", "A"));
+        TableRowSorter control1 = new TableRowSorter(tablaCalificados.getModel());
+        tablaCalificados.setRowSorter(control1);
     }
 
     private void cargarCategorias() {
@@ -76,6 +83,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlumnos = new javax.swing.JTable();
         btnCalificar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,7 +105,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
         txtNota4 = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaCalificados = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -120,12 +128,20 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
 
             }
         ));
+        tablaAlumnos.setRowHeight(20);
         jScrollPane1.setViewportView(tablaAlumnos);
 
         btnCalificar.setText("Calificar");
         btnCalificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalificarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ver Calificados");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -139,6 +155,8 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnCalificar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -148,7 +166,9 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(btnCalificar)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCalificar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -287,7 +307,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alumnos Calificados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCalificados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -295,7 +315,8 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tablaCalificados.setRowHeight(20);
+        jScrollPane2.setViewportView(tablaCalificados);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -440,7 +461,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
             txtNota1.requestFocus();
             return;
         }
-        if (txtNota2.getText().length() == 0 ) {
+        if (txtNota2.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Debes ingresar una nota del segundo parcial", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
             txtNota2.requestFocus();
             return;
@@ -450,7 +471,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
             txtNota3.requestFocus();
             return;
         }
-        if (txtNota4.getText().length() == 0 ) {
+        if (txtNota4.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Debes ingresar una nota del cuarto parcial", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
             txtNota4.requestFocus();
             return;
@@ -468,11 +489,22 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
         respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
         if (respuesta.equals("OK")) {
             this.limpiar();
+            System.out.println("Error antes d listar");
+            this.listarAlumnosCalif();
+            System.out.println("Error despues de listar");
             tabGeneral.setEnabledAt(1, false);
             tabGeneral.setEnabledAt(0, true);
             tabGeneral.setSelectedIndex(0);
+
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        tabGeneral.setEnabledAt(0, false);
+        tabGeneral.setEnabledAt(1, true);
+        tabGeneral.setSelectedIndex(1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -483,6 +515,7 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cboAsignatura;
     private javax.swing.JComboBox<String> cboProfesor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -500,10 +533,10 @@ public class FrmPrimerGrado extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblIdAlumno;
     private javax.swing.JTabbedPane tabGeneral;
     private javax.swing.JTable tablaAlumnos;
+    private javax.swing.JTable tablaCalificados;
     private javax.swing.JTextField txtNombreAlumno;
     private javax.swing.JTextField txtNota1;
     private javax.swing.JTextField txtNota2;

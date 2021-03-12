@@ -22,14 +22,34 @@ public class GradoCalificaiones {
     private String rtnAlumno;
     private int idAsignatura;
     private String nombreAsignatura;
+    private double notaTotal = 0.00;
 
     public GradoCalificaiones() {
+    }
+
+    public GradoCalificaiones(int idCalificacion, String nombreAlumno, double nota1, double nota2, double nota3, double nota4, String nombreProfesor, String nombreAsignatura) {
+        this.idCalificacion = idCalificacion;
+        this.nombreAlumno = nombreAlumno;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.nota4 = nota4;
+        this.nombreProfesor = nombreProfesor;
+        this.nombreAsignatura = nombreAsignatura;
     }
 
     public GradoCalificaiones(int idAlumno, String nombreAlumno, String rtnAlumno) {
         this.idAlumno = idAlumno;
         this.nombreAlumno = nombreAlumno;
         this.rtnAlumno = rtnAlumno;
+    }
+
+    public double getNotaTotal() {
+        return notaTotal;
+    }
+
+    public void setNotaTotal(double notaTotal) {
+        this.notaTotal = notaTotal;
     }
 
     public int getIdProfesor() {

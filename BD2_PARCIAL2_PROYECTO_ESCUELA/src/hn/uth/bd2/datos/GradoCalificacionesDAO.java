@@ -58,6 +58,33 @@ public class GradoCalificacionesDAO {
         }
         return lista;
     }
+    
+    public List<GradoCalificaiones> listarCalificados(String nombreGrado, String seccion) {
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        try {
+            insertando = CON.conectar().prepareCall("{call CURSOR_CALIFICACIONES(?,?,?)}");
+            insertando.setString(1, nombreGrado);
+            insertando.setString(2, seccion);
+            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando.executeUpdate();
+            
+            rs = (ResultSet) insertando.getObject(3);
+            while (rs.next()) {
+                listaCalif.add(new GradoCalificaiones(rs.getInt(1), rs.getString(2), rs.getDouble(3),rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),rs.getString(7),rs.getString(8)));
+            }
+            insertando.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error capa DAO: "+e.getMessage());
+        } finally {
+            insertando = null;
+            rs = null;
+            CON.cerrarConexion();
+        }
+        return listaCalif;
+    }
+    
+    
 
     public List<ProfesoresCalificacion> comboProfesores(String grado, String seccion) {
         List<ProfesoresCalificacion> registros = new ArrayList();

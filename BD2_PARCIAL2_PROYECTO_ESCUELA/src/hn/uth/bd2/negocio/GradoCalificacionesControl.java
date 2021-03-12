@@ -22,7 +22,6 @@ public class GradoCalificacionesControl {
     private final GradoCalificacionesDAO DATOS;
     private GradoCalificaiones objeto;
     private DefaultTableModel modeloTabla;
-    public int registrosMostrados;
     private String respuesta;
 
     public GradoCalificacionesControl() {
@@ -43,8 +42,40 @@ public class GradoCalificacionesControl {
             registro[1] = item.getNombreAlumno();
             registro[2] = item.getRtnAlumno();
             this.modeloTabla.addRow(registro);
-            this.registrosMostrados = this.registrosMostrados + 1;
         }
+        return this.modeloTabla;
+    }
+    
+    public DefaultTableModel listarAlumnosCalificados(String grado, String seccion) {
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        listaCalif.addAll(DATOS.listarCalificados(grado, seccion));
+        double notaTotal = 0.00;
+        String resultado = "";    
+        String[] titulos = {"Id", "Nombre Alumno", "I-Parcial", "II-Parcial", "III-Parcial","IV-Parcial","Profesor","Asignatura","Total","Resultado"};
+        this.modeloTabla = new DefaultTableModel(null, titulos);
+
+        String[] registro = new String[10];
+
+        for (GradoCalificaiones calif: listaCalif) {
+            registro[0] = Integer.toString(calif.getIdCalificacion());
+            registro[1] = calif.getNombreAlumno();
+            registro[2] = Double.toString(calif.getNota1());
+            registro[3] = Double.toString(calif.getNota2());
+            registro[4] = Double.toString(calif.getNota3());
+            registro[5] = Double.toString(calif.getNota4());
+            notaTotal =+ ((calif.getNota1() + calif.getNota2() + calif.getNota3() + calif.getNota4())/4);
+            if (notaTotal >= 70) {
+                resultado = "Aprobado";
+            } else {
+                resultado = "Reprobado";
+            }
+            registro[6] = calif.getNombreProfesor();
+            registro[7] = calif.getNombreAsignatura();
+            registro[8] = Double.toString(notaTotal);
+            registro[9] = resultado;
+            this.modeloTabla.addRow(registro);
+        }
+        System.out.println("Error en capa control");
         return this.modeloTabla;
     }
     
