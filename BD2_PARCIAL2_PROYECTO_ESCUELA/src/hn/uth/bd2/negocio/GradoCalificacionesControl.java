@@ -6,9 +6,12 @@
 package hn.uth.bd2.negocio;
 
 import hn.uth.bd2.datos.GradoCalificacionesDAO;
+import hn.uth.bd2.objetos.AsignaturaCalificacion;
 import hn.uth.bd2.objetos.GradoCalificaiones;
+import hn.uth.bd2.objetos.ProfesoresCalificacion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,5 +46,27 @@ public class GradoCalificacionesControl {
             this.registrosMostrados = this.registrosMostrados + 1;
         }
         return this.modeloTabla;
+    }
+    
+    public DefaultComboBoxModel llenandoProfesores(String grado, String seccion) {
+        DefaultComboBoxModel items = new DefaultComboBoxModel();
+        List<ProfesoresCalificacion> listaProfesores = new ArrayList();
+        listaProfesores = DATOS.comboProfesores(grado, seccion);
+
+        for (ProfesoresCalificacion objetoProfesores : listaProfesores) {
+            items.addElement(new ProfesoresCalificacion(objetoProfesores.getId(), objetoProfesores.getNombreProfesores()));
+        }
+        return items;
+    }
+    
+    public DefaultComboBoxModel llenandoAsignaturas() {
+        DefaultComboBoxModel items2 = new DefaultComboBoxModel();
+        List<AsignaturaCalificacion> lista = new ArrayList();
+        lista = DATOS.comboAsignaturas();
+
+        for (AsignaturaCalificacion objeto : lista) {
+            items2.addElement(new AsignaturaCalificacion(objeto.getId(), objeto.getNombreAsignatura()));
+        }
+        return items2;
     }
 }

@@ -18,6 +18,8 @@ public class GradoCalificaiones {
     private double nota4;
     private int idAlumno;
     private String nombreAlumno;
+    private int idProfesor;
+    private String nombreProfesor;
     private String rtnAlumno;
     private int idAsignatura;
     private String nombreAsignatura;
@@ -113,7 +115,9 @@ public class GradoCalificaiones {
 
     @Override
     public String toString() {
-        return "GradoCalificaiones{" + "idCalificacion=" + idCalificacion + ", nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + ", nota4=" + nota4 + ", idAlumno=" + idAlumno + ", nombreAlumno=" + nombreAlumno + ", rtnAlumno=" + rtnAlumno + ", idAsignatura=" + idAsignatura + ", nombreAsignatura=" + nombreAsignatura + '}';
+        return "GradoCalificaiones{" + "idCalificacion=" + idCalificacion + ", nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3 + ", nota4=" + nota4 + ", idAlumno=" + idAlumno + ", nombreAlumno=" + nombreAlumno + ", idProfesor=" + idProfesor + ", nombreProfesor=" + nombreProfesor + ", rtnAlumno=" + rtnAlumno + ", idAsignatura=" + idAsignatura + ", nombreAsignatura=" + nombreAsignatura + '}';
     }
+
+    
 
 }
