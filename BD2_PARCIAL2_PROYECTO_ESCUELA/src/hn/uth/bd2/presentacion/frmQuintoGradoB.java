@@ -57,7 +57,7 @@ public class frmQuintoGradoB extends javax.swing.JInternalFrame {
         boolean banderin = false;
         GradoCalificacionesDAO grado = new GradoCalificacionesDAO();
         List<GradoCalificaiones> listaCalif = new ArrayList();
-        listaCalif.addAll(grado.listarCalificados("Primer Grado", "A"));
+        listaCalif.addAll(grado.listarCalificados("Quinto Grado", "B"));
         for (GradoCalificaiones gradoCalificaiones : listaCalif) {
             if (gradoCalificaiones.getIdAlumno() == idAlumno && gradoCalificaiones.getIdAsignatura() == idAsignatura) {
                 banderin = true;
