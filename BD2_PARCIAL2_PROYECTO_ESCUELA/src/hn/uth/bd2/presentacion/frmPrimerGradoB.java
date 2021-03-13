@@ -5,9 +5,13 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.datos.GradoCalificacionesDAO;
 import hn.uth.bd2.negocio.GradoCalificacionesControl;
 import hn.uth.bd2.objetos.AsignaturaCalificacion;
+import hn.uth.bd2.objetos.GradoCalificaiones;
 import hn.uth.bd2.objetos.ProfesoresCalificacion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -78,6 +82,20 @@ public class frmPrimerGradoB extends javax.swing.JInternalFrame {
         tablaCalificados.getColumnModel().getColumn(3).setMinWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
+    
+    private boolean validarAlumnoCalificado(int idAlumno, int idAsignatura) {
+        boolean banderin = false;
+        GradoCalificacionesDAO grado = new GradoCalificacionesDAO();
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        listaCalif.addAll(grado.listarCalificados("Primer Grado", "B"));
+        for (GradoCalificaiones gradoCalificaiones : listaCalif) {
+            if (gradoCalificaiones.getIdAlumno() == idAlumno && gradoCalificaiones.getIdAsignatura() == idAsignatura) {
+                banderin = true;
+                return banderin;
+            }
+        }
+        return banderin;
     }
 
     private void mensajeError(String mensaje) {
@@ -534,14 +552,20 @@ public class frmPrimerGradoB extends javax.swing.JInternalFrame {
         } else {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
-            respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
-            if (respuesta.equals("OK")) {
-                this.limpiar();
-                this.listarAlumnosCalif();
-                this.listarAlumnos();
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+            int AlumnoId = Integer.parseInt(lblIdAlumno.getText());
+            boolean banderinResp = this.validarAlumnoCalificado(AlumnoId, item2.getId());
+            if (banderinResp) {
+                this.mensajeError("El Alumno ya fue calificado para esa clase");
+            } else {
+                respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, AlumnoId, item2.getId(), item1.getId());
+                if (respuesta.equals("OK")) {
+                    this.limpiar();
+                    this.listarAlumnosCalif();
+                    this.listarAlumnos();
+                    tabGeneral.setEnabledAt(1, false);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setSelectedIndex(0);
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed

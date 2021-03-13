@@ -5,9 +5,13 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.datos.GradoCalificacionesDAO;
 import hn.uth.bd2.negocio.GradoCalificacionesControl;
 import hn.uth.bd2.objetos.AsignaturaCalificacion;
+import hn.uth.bd2.objetos.GradoCalificaiones;
 import hn.uth.bd2.objetos.ProfesoresCalificacion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -54,6 +58,20 @@ public class frmSegundoGradoA extends javax.swing.JInternalFrame {
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);
+    }
+
+    private boolean validarAlumnoCalificado(int idAlumno, int idAsignatura) {
+        boolean banderin = false;
+        GradoCalificacionesDAO grado = new GradoCalificacionesDAO();
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        listaCalif.addAll(grado.listarCalificados("Segundo Grado", "A"));
+        for (GradoCalificaiones gradoCalificaiones : listaCalif) {
+            if (gradoCalificaiones.getIdAlumno() == idAlumno && gradoCalificaiones.getIdAsignatura() == idAsignatura) {
+                banderin = true;
+                return banderin;
+            }
+        }
+        return banderin;
     }
 
     private void limpiar() {
@@ -477,7 +495,7 @@ public class frmSegundoGradoA extends javax.swing.JInternalFrame {
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
-        
+
     }//GEN-LAST:event_btnCalificarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -535,14 +553,20 @@ public class frmSegundoGradoA extends javax.swing.JInternalFrame {
         } else {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
-            respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
-            if (respuesta.equals("OK")) {
-                this.limpiar();
-                this.listarAlumnosCalif();
-                this.listarAlumnos();
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+            int AlumnoId = Integer.parseInt(lblIdAlumno.getText());
+            boolean banderinResp = this.validarAlumnoCalificado(AlumnoId, item2.getId());
+            if (banderinResp) {
+                this.mensajeError("El Alumno ya fue calificado para esa clase");
+            } else {
+                respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, AlumnoId, item2.getId(), item1.getId());
+                if (respuesta.equals("OK")) {
+                    this.limpiar();
+                    this.listarAlumnosCalif();
+                    this.listarAlumnos();
+                    tabGeneral.setEnabledAt(1, false);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setSelectedIndex(0);
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed

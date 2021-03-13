@@ -35,13 +35,16 @@ public class GradoCalificacionesDAO {
     public List<GradoCalificaiones> listar(String nombreGrado, String seccion) {
         List<GradoCalificaiones> lista = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call LISTA_ALUMNOSC(?,?,?)}");
+            java.util.Date d = new java.util.Date();
+            java.sql.Date date2 = new java.sql.Date(d.getTime());
+            insertando = CON.conectar().prepareCall("{call LISTA_ALUMNOSC(?,?,?,?)}");
             insertando.setString(1, nombreGrado);
             insertando.setString(2, seccion);
-            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando.setDate(3, date2);
+            insertando.registerOutParameter(4, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
-            rs = (ResultSet) insertando.getObject(3);
+            rs = (ResultSet) insertando.getObject(4);
             while (rs.next()) {
                 lista.add(new GradoCalificaiones(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
