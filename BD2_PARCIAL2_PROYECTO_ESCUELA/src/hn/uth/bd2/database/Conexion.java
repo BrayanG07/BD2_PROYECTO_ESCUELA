@@ -39,7 +39,7 @@ public class Conexion {
         return this.cadena;
     }
     
-    public void cerrarConexion() {
+    public void desconectar() {
         try {
             this.cadena.close();
         } catch (SQLException e) {
