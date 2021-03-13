@@ -29,18 +29,18 @@ INSERT INTO MATRICULAS (ID_MATRICULA, FECHA, ID_ANIO_ESCOLAR, ID_ALUMNO, ID_NIVE
 
 
 --INSERTAR EN PROFESORES
-INSERT INTO PROFESORES VALUES('1','Eliud','Varela','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('2','Tania','Garcia','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('3','Carlos','Oliva','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('4','Lionel','Messi','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('5','Cristiano','Ronaldo','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('6','Gerard','Pique','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('7','Neymar','Santos','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('8','Andres','Iniesta','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('9','Iker','Casillas','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('10','David','Villa','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('11','Pedro','Gonzales','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
-INSERT INTO PROFESORES VALUES('12','Jordi','Alba','5202202', 'TGU','99999999','C:Imagenes/foto.jpg','A');
+INSERT INTO PROFESORES VALUES('1','Eliud','Varela','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('2','Tania','Garcia','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('3','Carlos','Oliva','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('4','Lionel','Messi','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('5','Cristiano','Ronaldo','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('6','Gerard','Pique','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('7','Neymar','Santos','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('8','Andres','Iniesta','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('9','Iker','Casillas','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('10','David','Villa','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('11','Pedro','Gonzales','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
+INSERT INTO PROFESORES VALUES('12','Jordi','Alba','5202202', 'TGU','99999999','C:Imagenes/foto.jpg',1);
 
 --INSERTAR EN TABLA PROFESORES NVL EDUCATIVO
 INSERT INTO NVL_EDUCATIVO_PROFESORES VALUES(2,1);

@@ -14,12 +14,45 @@ public class AsignaturasProfesores {
     private String nombreProfesor;
     private int idAsignatura;
     private String nombreAsignatura;
+    private int idGrado;
+    private String nombreGrado;
+    private String seccion;
 
-    public AsignaturasProfesores(int idProfesor, String nombreProfesor, int idAsignatura, String nombreAsignatura) {
+    public AsignaturasProfesores(int idProfesor, String nombreProfesor, int idAsignatura, String nombreAsignatura, int idGrado, String nombreGrado, String seccion) {
         this.idProfesor = idProfesor;
         this.nombreProfesor = nombreProfesor;
         this.idAsignatura = idAsignatura;
         this.nombreAsignatura = nombreAsignatura;
+        this.idGrado = idGrado;
+        this.nombreGrado = nombreGrado;
+        this.seccion = seccion;
+    }
+
+    public AsignaturasProfesores() {
+    }
+
+    public int getIdGrado() {
+        return idGrado;
+    }
+
+    public void setIdGrado(int idGrado) {
+        this.idGrado = idGrado;
+    }
+
+    public String getNombreGrado() {
+        return nombreGrado;
+    }
+
+    public void setNombreGrado(String nombreGrado) {
+        this.nombreGrado = nombreGrado;
+    }
+
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
     }
 
     public int getIdProfesor() {

@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Buddys
  */
 public class AsigProfesoresControl {
+
     private final AsignaturasProfesoresDAO DATOS;
     private Profesores objeto;
     private Asignaturas objAsignaturas;
@@ -31,7 +32,7 @@ public class AsigProfesoresControl {
         this.objeto = new Profesores();
         this.objAsignaturas = new Asignaturas();
     }
-    
+
     public String buscar(int id) {
         String nombre = "";
         List<Profesores> lista = new ArrayList();
@@ -42,7 +43,7 @@ public class AsigProfesoresControl {
         }
         return nombre;
     }
-    
+
     public DefaultTableModel listarAsignaturas() {
         List<Asignaturas> lista = new ArrayList();
         lista.addAll(DATOS.listarAsignaturas());
@@ -59,33 +60,36 @@ public class AsigProfesoresControl {
         }
         return this.modeloTabla;
     }
-    
+
     public DefaultTableModel listarAsignaciones(String busqueda) {
         List<AsignaturasProfesores> lista = new ArrayList();
         lista.addAll(DATOS.listarAsignaturasAsignadas(busqueda));
 
-        String[] titulos = {"ID Profesor", "Profesor", "ID Asignatura", "Asignatura"};
+        String[] titulos = {"ID Profesor", "Profesor", "ID Asignatura", "Asignatura", "ID Grado", "Nombre", "Seccion"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
-        String[] registro = new String[4];
+        String[] registro = new String[7];
         for (AsignaturasProfesores item : lista) {
             registro[0] = Integer.toString(item.getIdProfesor());
             registro[1] = item.getNombreProfesor();
             registro[2] = Integer.toString(item.getIdAsignatura());
             registro[3] = item.getNombreAsignatura();
+            registro[4] = Integer.toString(item.getIdGrado());
+            registro[5] = item.getNombreGrado();
+            registro[6] = item.getSeccion();
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
     }
-    
-    public String insertarAsignaturasProf(int idProfesor, int idAsignatura) {
-        if (DATOS.insertarAsignaturaProfe(idProfesor, idAsignatura)) {
+
+    public String insertarAsignaturasProf(int idProfesor, int idAsignatura, int idGrado) {
+        if (DATOS.insertarAsignaturaProfe(idProfesor, idAsignatura, idGrado)) {
             return "OK";
         } else {
             return "Error en el registro";
         }
     }
-    
+
     public DefaultComboBoxModel llenandoCombo() {
         DefaultComboBoxModel items2 = new DefaultComboBoxModel();
         List<Grado> lista = new ArrayList();

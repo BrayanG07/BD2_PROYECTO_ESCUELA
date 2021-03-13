@@ -80,21 +80,22 @@ public class AsignaturasProfesoresDAO {
         return registros;
     }
 
-    public boolean insertarAsignaturaProfe(int idProfesor, int idAsignatura) {
+    public boolean insertarAsignaturaProfe(int idProfesor, int idAsignatura, int idGrado) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_INSERTAR_ASIG_PROFESORES(?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call SP_INSERTAR_ASIG_PROFESORES(?,?,?,?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.setInt(2, idAsignatura);
-            insertando.registerOutParameter(3, OracleTypes.INTEGER);
-            insertando.registerOutParameter(4, OracleTypes.VARCHAR);
+            insertando.setInt(3, idGrado);
+            insertando.registerOutParameter(4, OracleTypes.INTEGER);
+            insertando.registerOutParameter(5, OracleTypes.VARCHAR);
 
             insertando.execute();
             respuesta = true;
 
-            if (insertando.getInt(3) == 1) {
+            if (insertando.getInt(4) == 1) {
                 respuesta = false;
-                JOptionPane.showMessageDialog(null, insertando.getString(4), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Asignaciones registradas correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -119,7 +120,7 @@ public class AsignaturasProfesoresDAO {
 
             rs = (ResultSet) insertando.getObject(2);
             while (rs.next()) {
-                registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
+                registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)));
             }
             insertando.close();
             rs.close();

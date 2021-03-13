@@ -7,6 +7,7 @@ package hn.uth.bd2.presentacion;
 
 import hn.uth.bd2.negocio.AsigProfesoresControl;
 import hn.uth.bd2.objetos.Asignaturas;
+import hn.uth.bd2.objetos.Grado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -61,6 +62,10 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaPrincipal.getColumnModel().getColumn(2).setMinWidth(0);
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+        tablaPrincipal.getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaPrincipal.getColumnModel().getColumn(4).setMinWidth(0);
+        tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
     
     private void cargarGrado() {
@@ -551,8 +556,10 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         if (this.accion.equals("editar")) {
 
         } else {
+            Grado item = (Grado)cboGrado.getSelectedItem();
+            System.out.println(item.getId());
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
-                System.out.println(this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + "")));
+                System.out.println(this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId()));
             }
             this.listarTodo("");
             tablaAsignaturas.setModel(this.CONTROL.listarAsignaturas());
