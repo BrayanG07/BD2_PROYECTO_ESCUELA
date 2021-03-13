@@ -8,9 +8,11 @@ package hn.uth.bd2.negocio;
 import hn.uth.bd2.datos.AsignaturasProfesoresDAO;
 import hn.uth.bd2.objetos.Asignaturas;
 import hn.uth.bd2.objetos.AsignaturasProfesores;
+import hn.uth.bd2.objetos.Grado;
 import hn.uth.bd2.objetos.Profesores;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -82,5 +84,16 @@ public class AsigProfesoresControl {
         } else {
             return "Error en el registro";
         }
+    }
+    
+    public DefaultComboBoxModel llenandoCombo() {
+        DefaultComboBoxModel items2 = new DefaultComboBoxModel();
+        List<Grado> lista = new ArrayList();
+        lista = DATOS.listarGrado();
+
+        for (Grado objeto : lista) {
+            items2.addElement(new Grado(objeto.getId(), objeto.getNombre(), objeto.getSeccion()));
+        }
+        return items2;
     }
 }

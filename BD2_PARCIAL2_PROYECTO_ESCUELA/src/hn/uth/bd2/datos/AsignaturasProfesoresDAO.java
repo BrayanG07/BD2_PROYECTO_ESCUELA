@@ -8,6 +8,7 @@ package hn.uth.bd2.datos;
 import hn.uth.bd2.database.Conexion;
 import hn.uth.bd2.objetos.Asignaturas;
 import hn.uth.bd2.objetos.AsignaturasProfesores;
+import hn.uth.bd2.objetos.Grado;
 import hn.uth.bd2.objetos.Profesores;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -107,7 +108,7 @@ public class AsignaturasProfesoresDAO {
         }
         return respuesta;
     }
-    
+
     public List<AsignaturasProfesores> listarAsignaturasAsignadas(String busqueda) {
         List<AsignaturasProfesores> registros = new ArrayList();
         try {
@@ -118,7 +119,30 @@ public class AsignaturasProfesoresDAO {
 
             rs = (ResultSet) insertando.getObject(2);
             while (rs.next()) {
-                registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2), rs.getInt(1), rs.getString(2)));
+                registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
+            }
+            insertando.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            insertando = null;
+            rs = null;
+            CON.cerrarConexion();
+        }
+        return registros;
+    }
+
+    public List<Grado> listarGrado() {
+        List<Grado> registros = new ArrayList();
+        try {
+            insertando = CON.conectar().prepareCall("{call SP_GRADOS_LISTA(?)}");
+            insertando.registerOutParameter(1, OracleTypes.CURSOR);
+            insertando.executeUpdate();
+
+            rs = (ResultSet) insertando.getObject(1);
+            while (rs.next()) {
+                registros.add(new Grado(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
             insertando.close();
             rs.close();

@@ -7,6 +7,7 @@ package hn.uth.bd2.presentacion;
 
 import hn.uth.bd2.negocio.AsigProfesoresControl;
 import hn.uth.bd2.objetos.Asignaturas;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +34,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         txtNombreProfesor.setEnabled(false);
         this.accion = "guardar";
         this.listarTodo("");
+        this.cargarGrado();
         tablaAsignaturas.setModel(this.CONTROL.listarAsignaturas());
         tabGeneral.setEnabledAt(1, false);
         DefaultTableModel model;
@@ -60,6 +62,12 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
     }
+    
+    private void cargarGrado() {
+        DefaultComboBoxModel items = this.CONTROL.llenandoCombo();
+        cboGrado.setModel(items);
+    }
+
 
     private void busquedaIdProfesor(int id) {
         String respuesta = this.CONTROL.buscar(id);
@@ -127,6 +135,8 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         btnIdBusqueda = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNombreProfesor = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cboGrado = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAsignaturas = new javax.swing.JTable();
@@ -227,7 +237,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaListadoLayout.setVerticalGroup(
             tablaListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablaListadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -267,34 +277,44 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Nombre Profesor");
 
+        jLabel4.setText("Grado:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtIdProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIdBusqueda)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtIdProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnIdBusqueda))
+                    .addComponent(cboGrado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNombreProfesor)
+                .addComponent(txtNombreProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtIdProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIdBusqueda)
                     .addComponent(jLabel3)
                     .addComponent(txtNombreProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cboGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignaciones"));
@@ -567,9 +587,11 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRemueve;
+    private javax.swing.JComboBox<String> cboGrado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

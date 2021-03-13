@@ -54,7 +54,7 @@ public class frmCuartoGradoB extends javax.swing.JInternalFrame {
     }
 
     private void cargarCategorias() {
-        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Cuarto Grado", "B");
+        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores();
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);

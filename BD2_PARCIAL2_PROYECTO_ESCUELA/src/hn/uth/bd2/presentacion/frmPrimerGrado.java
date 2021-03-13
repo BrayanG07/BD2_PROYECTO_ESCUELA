@@ -55,7 +55,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     }
 
     private void cargarCategorias() {
-        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Primer Grado", "A");
+        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores();
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);
