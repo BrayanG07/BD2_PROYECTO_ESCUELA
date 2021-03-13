@@ -136,7 +136,7 @@ public class frmPrimerGradoB extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Primer Grado");
+        setTitle("Primer Grado Seccion B");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Alumnos"));
 

@@ -56,24 +56,27 @@ public class GradoCalificacionesDAO {
         }
         return lista;
     }
-    
+
     public List<GradoCalificaiones> listarCalificados(String nombreGrado, String seccion) {
         List<GradoCalificaiones> listaCalif = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call CURSOR_CALIFICACIONES(?,?,?)}");
+            java.util.Date d = new java.util.Date();
+            java.sql.Date date2 = new java.sql.Date(d.getTime());
+            insertando = CON.conectar().prepareCall("{call CURSOR_CALIFICACIONES(?,?,?,?)}");
             insertando.setString(1, nombreGrado);
             insertando.setString(2, seccion);
-            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando.setDate(3, date2);
+            insertando.registerOutParameter(4, OracleTypes.CURSOR);
             insertando.executeUpdate();
-            
-            rs = (ResultSet) insertando.getObject(3);
+
+            rs = (ResultSet) insertando.getObject(4);
             while (rs.next()) {
-                listaCalif.add(new GradoCalificaiones(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getDouble(6),rs.getDouble(7),rs.getDouble(8),rs.getDouble(9),rs.getString(10),rs.getString(11)));
+                listaCalif.add(new GradoCalificaiones(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10), rs.getString(11)));
             }
             insertando.close();
             rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error capa DAO: "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error capa DAO: " + e.getMessage());
         } finally {
             insertando = null;
             rs = null;
@@ -81,8 +84,6 @@ public class GradoCalificacionesDAO {
         }
         return listaCalif;
     }
-    
-    
 
     public List<ProfesoresCalificacion> comboProfesores(String grado, String seccion) {
         List<ProfesoresCalificacion> registros = new ArrayList();
@@ -165,7 +166,7 @@ public class GradoCalificacionesDAO {
         }
         return respuesta;
     }
-    
+
     public boolean actualizar(GradoCalificaiones objeto) {
         respuesta = false;
         try {
