@@ -5,10 +5,13 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.datos.GradoCalificacionesDAO;
 import hn.uth.bd2.negocio.GradoCalificacionesControl;
 import hn.uth.bd2.objetos.AsignaturaCalificacion;
+import hn.uth.bd2.objetos.GradoCalificaiones;
 import hn.uth.bd2.objetos.ProfesoresCalificacion;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -30,11 +33,12 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         this.CONTROL = new GradoCalificacionesControl();
         this.listarAlumnos();
         this.listarAlumnosCalif();
-        this.cargarCategorias();
         txtNombreAlumno.enable(false);
         tabGeneral.setEnabledAt(1, false);
         this.accion = "guardar";
         txtIdCalificacion.setVisible(false);
+        this.cargarCategorias();
+
     }
 
     private void listarAlumnos() {
@@ -51,7 +55,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     }
 
     private void cargarCategorias() {
-        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Primer Grado", "A");
+        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores();
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);
@@ -64,6 +68,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         txtNota2.setText("");
         txtNota3.setText("");
         txtNota4.setText("");
+        this.accion = "guardar";
     }
 
     private void ocultarColumnas() {
@@ -79,6 +84,20 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         tablaCalificados.getColumnModel().getColumn(3).setMinWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
+
+    private boolean validarAlumnoCalificado(int idAlumno, int idAsignatura) {
+        boolean banderin = false;
+        GradoCalificacionesDAO grado = new GradoCalificacionesDAO();
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        listaCalif.addAll(grado.listarCalificados("Primer Grado", "A"));
+        for (GradoCalificaiones gradoCalificaiones : listaCalif) {
+            if (gradoCalificaiones.getIdAlumno() == idAlumno && gradoCalificaiones.getIdAsignatura() == idAsignatura) {
+                banderin = true;
+                return banderin;
+            }
+        }
+        return banderin;
     }
 
     private void mensajeError(String mensaje) {
@@ -282,10 +301,9 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(lblIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(98, 98, 98))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(txtIdCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(158, 158, 158)))
                         .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(txtNombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,11 +340,35 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Nota Primer Parcial");
 
+        txtNota1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota1KeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Nota Segundo Parcial");
+
+        txtNota2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota2KeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Nota Tercer Parcial");
 
+        txtNota3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota3KeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Nota Cuarto Parcial");
+
+        txtNota4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota4KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -475,10 +517,12 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
+            this.accion = "guardar";
+            btnGuardar.setText("Guardar");
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
-        
+
     }//GEN-LAST:event_btnCalificarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -520,7 +564,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Las notas ingresadas no deben ser mayor a 100, es obligatorio.", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         if (this.accion.equals("editar")) {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
@@ -536,14 +579,20 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         } else {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
-            respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
-            if (respuesta.equals("OK")) {
-                this.limpiar();
-                this.listarAlumnosCalif();
-                this.listarAlumnos();
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+            int AlumnoId = Integer.parseInt(lblIdAlumno.getText());
+            boolean banderinResp = this.validarAlumnoCalificado(AlumnoId, item2.getId());
+            if (banderinResp) {
+                this.mensajeError("El Alumno ya fue calificado para esa clase");
+            } else {
+                respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, AlumnoId, item2.getId(), item1.getId());
+                if (respuesta.equals("OK")) {
+                    this.limpiar();
+                    this.listarAlumnosCalif();
+                    this.listarAlumnos();
+                    tabGeneral.setEnabledAt(1, false);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setSelectedIndex(0);
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -593,6 +642,54 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNota1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota1KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota1KeyTyped
+
+    private void txtNota3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota3KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota3KeyTyped
+
+    private void txtNota2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota2KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota2KeyTyped
+
+    private void txtNota4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota4KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota4KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
