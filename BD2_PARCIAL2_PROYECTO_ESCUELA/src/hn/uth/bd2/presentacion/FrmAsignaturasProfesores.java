@@ -5,8 +5,10 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.datos.AsignaturasProfesoresDAO;
 import hn.uth.bd2.negocio.AsigProfesoresControl;
 import hn.uth.bd2.objetos.Asignaturas;
+import hn.uth.bd2.objetos.AsignaturasProfesores;
 import hn.uth.bd2.objetos.Grado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
     private String accion;
     private int seleccionQuitarTabla;
     private int seleccionAsignatura;
+    private int idGradoTabla;
 
     /**
      * Creates new form FrmAsignaturasProfesores
@@ -44,6 +47,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaAsignando.setModel(model);
         auxAsignatura = null;
         seleccionAsignatura = -1;
+        idGradoTabla = 0;
     }
 
     private void listarTodo(String busqueda) {
@@ -68,20 +72,10 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
 
-//    public void ponerDatos(int id) {
-//        auxAsignatura = CONTROL.listandoUnRegistro(id);    
-//        DefaultTableModel model;
-//        String columnas[] = {"ID", "NOMBRE"};
-//        model = new DefaultTableModel(null, columnas);
-//        tablaAsignando.setModel(model);
-//
-//        CategoriaAbogado c;
-//        for (int i : abogadoControl.listandoIdEspecialidad(id)) {
-//            c = categoriaAbogadoControl.listarUnRegistro(i);
-//
-//            listarEspecialidad(c.getId() + "", c.getNombre(), tblEspecialidad);
-//        }
-//    }
+    private void listarAsignaturasId(int idProfesor, int idCurso) {
+        tablaAsignando.setModel(this.CONTROL.listarAsignacionesId(idProfesor, idCurso));
+    }
+
     private void cargarGrado() {
         DefaultComboBoxModel items = this.CONTROL.llenandoCombo();
         cboGrado.setModel(items);
@@ -116,6 +110,39 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         String columnas[] = {"ID", "NOMBRE"};
         model = new DefaultTableModel(null, columnas);
         tablaAsignando.setModel(model);
+        this.accion = "guardar";
+    }
+
+    private void editar(int idProfesor) {
+        String capturador = this.CONTROL.eliminarDetalle(idProfesor, idGradoTabla);
+        String detalle = "";
+        if (capturador.equals("OK")) {
+            Grado item2 = (Grado) cboGrado.getSelectedItem();
+            for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
+                detalle = this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item2.getId());
+            }
+            if (detalle.equals("OK")) {
+                this.mensajeOk("Registros actualizados correctamente");
+                this.listarTodo("");
+                this.limpiar();
+                tablaAsignaturas.setModel(this.CONTROL.listarAsignaturas());
+                tabGeneral.setEnabledAt(1, false);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setSelectedIndex(0);
+            }
+        }
+        btnIdBusqueda.setEnabled(true);
+        txtIdProfesor.setEnabled(true);
+    }
+    
+    private boolean validarAsignacionExistente(int idProfesor, int idGrado, int idAsignatura){
+        boolean respuesta = false;
+        for (AsignaturasProfesores lista : new AsignaturasProfesoresDAO().listarAsignaturasAsignadas("")) {
+            if (lista.getIdProfesor() == idProfesor && lista.getIdGrado() == idGrado && lista.getIdAsignatura() == idAsignatura) {
+                respuesta = true;
+            }
+        }
+        return respuesta;
     }
 
     private void mensajeError(String mensaje) {
@@ -512,6 +539,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setEnabledAt(1, true);
         tabGeneral.setSelectedIndex(1);
+        btnGuardar.setText("Guardar");
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnFlechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlechaActionPerformed
@@ -572,14 +600,19 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         int idProfesor = Integer.parseInt(txtIdProfesor.getText());
         String respuesta = "";
         if (this.accion.equals("editar")) {
-
-            btnIdBusqueda.setEnabled(true);
-            txtIdProfesor.setEnabled(true);
+            this.editar(idProfesor);
         } else {
+            boolean resp;
             Grado item = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
-//                System.out.println(this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId()));
-                respuesta = this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId());
+                resp = this.validarAsignacionExistente(idProfesor, item.getId(), Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""));
+                if (resp) {
+                    this.mensajeError("El profesor ya esta impartiendo la clase de "+ tablaAsignando.getValueAt(i, 1) +" en el grado "+item.getNombre()+" "+item.getSeccion());
+                    txtIdProfesor.requestFocus();
+                    return;
+                }else{
+                    respuesta = this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId());
+                }
             }
             if (respuesta.equals("OK")) {
                 this.mensajeOk("Registros guardados correctamente");
@@ -598,9 +631,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         if (tablaPrincipal.getSelectedRowCount() == 1) {
             int idProfesor = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
             String nombreProfesor = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 1));
-            int idAsignatura = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 2)));
-            String nombreAsignatura = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 3));
-            int idGrado = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 4)));
+            idGradoTabla = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 4)));
             String nombreGrado = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 5));
             String seccion = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 6));
 
@@ -608,25 +639,13 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
             btnIdBusqueda.setEnabled(false);
             txtIdProfesor.setEnabled(false);
             txtNombreProfesor.setText(nombreProfesor);
-            Grado g = new Grado(idGrado, nombreGrado, seccion);
+            Grado g = new Grado(idGradoTabla, nombreGrado, seccion);
             cboGrado.setSelectedItem(g);
-
+            this.listarAsignaturasId(idProfesor, idGradoTabla);
         } else {
             this.mensajeError("Debes seleccionar el registro del profesor que deseas modificar");
         }
 
-//        if (seleccionAsignatura > -1) {
-////            ponerDatos(seleccionAsignatura);
-//            tabGeneral.setEnabledAt(0, false);
-//        tabGeneral.setEnabledAt(1, true);
-//        tabGeneral.setSelectedIndex(1);
-//
-//            seleccionAsignatura = -1;
-//        } else {
-//            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro del profesor", null, JOptionPane.WARNING_MESSAGE);
-//            seleccionAsignatura = -1;
-//        }
-//        tablaAsignaturas.clearSelection();
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setEnabledAt(1, true);
         tabGeneral.setSelectedIndex(1);
