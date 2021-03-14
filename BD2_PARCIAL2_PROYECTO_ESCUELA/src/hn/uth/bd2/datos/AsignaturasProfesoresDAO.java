@@ -79,6 +79,30 @@ public class AsignaturasProfesoresDAO {
         }
         return registros;
     }
+    
+    public List<AsignaturasProfesores> listarAsignaturasId(int idProfesor) {
+        List<AsignaturasProfesores> registros = new ArrayList();
+        try {
+            insertando = CON.conectar().prepareCall("{call SP_LISTAR_ASIGN_ID(?,?)}");
+            insertando.setInt(1, idProfesor);
+            insertando.registerOutParameter(2, OracleTypes.CURSOR);
+            insertando.executeUpdate();
+
+            rs = (ResultSet) insertando.getObject(2);
+            while (rs.next()) {
+                registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2)));
+            }
+            insertando.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            insertando = null;
+            rs = null;
+            CON.cerrarConexion();
+        }
+        return registros;
+    }
 
     public boolean insertarAsignaturaProfe(int idProfesor, int idAsignatura, int idGrado) {
         respuesta = false;

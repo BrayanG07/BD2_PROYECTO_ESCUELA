@@ -68,6 +68,20 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
 
+//    public void ponerDatos(int id) {
+//        auxAsignatura = CONTROL.listandoUnRegistro(id);    
+//        DefaultTableModel model;
+//        String columnas[] = {"ID", "NOMBRE"};
+//        model = new DefaultTableModel(null, columnas);
+//        tablaAsignando.setModel(model);
+//
+//        CategoriaAbogado c;
+//        for (int i : abogadoControl.listandoIdEspecialidad(id)) {
+//            c = categoriaAbogadoControl.listarUnRegistro(i);
+//
+//            listarEspecialidad(c.getId() + "", c.getNombre(), tblEspecialidad);
+//        }
+//    }
     private void cargarGrado() {
         DefaultComboBoxModel items = this.CONTROL.llenandoCombo();
         cboGrado.setModel(items);
@@ -559,6 +573,8 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         String respuesta = "";
         if (this.accion.equals("editar")) {
 
+            btnIdBusqueda.setEnabled(true);
+            txtIdProfesor.setEnabled(true);
         } else {
             Grado item = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
@@ -579,6 +595,38 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        if (tablaPrincipal.getSelectedRowCount() == 1) {
+            int idProfesor = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
+            String nombreProfesor = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 1));
+            int idAsignatura = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 2)));
+            String nombreAsignatura = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 3));
+            int idGrado = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 4)));
+            String nombreGrado = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 5));
+            String seccion = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 6));
+
+            txtIdProfesor.setText(Integer.toString(idProfesor));
+            btnIdBusqueda.setEnabled(false);
+            txtIdProfesor.setEnabled(false);
+            txtNombreProfesor.setText(nombreProfesor);
+            Grado g = new Grado(idGrado, nombreGrado, seccion);
+            cboGrado.setSelectedItem(g);
+
+        } else {
+            this.mensajeError("Debes seleccionar el registro del profesor que deseas modificar");
+        }
+
+//        if (seleccionAsignatura > -1) {
+////            ponerDatos(seleccionAsignatura);
+//            tabGeneral.setEnabledAt(0, false);
+//        tabGeneral.setEnabledAt(1, true);
+//        tabGeneral.setSelectedIndex(1);
+//
+//            seleccionAsignatura = -1;
+//        } else {
+//            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro del profesor", null, JOptionPane.WARNING_MESSAGE);
+//            seleccionAsignatura = -1;
+//        }
+//        tablaAsignaturas.clearSelection();
         tabGeneral.setEnabledAt(0, false);
         tabGeneral.setEnabledAt(1, true);
         tabGeneral.setSelectedIndex(1);
@@ -593,6 +641,8 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        btnIdBusqueda.setEnabled(true);
+        txtIdProfesor.setEnabled(true);
         tabGeneral.setEnabledAt(1, false);
         tabGeneral.setEnabledAt(0, true);
         tabGeneral.setSelectedIndex(0);

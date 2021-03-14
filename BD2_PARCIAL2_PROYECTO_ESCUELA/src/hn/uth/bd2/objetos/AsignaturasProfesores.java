@@ -28,6 +28,11 @@ public class AsignaturasProfesores {
         this.seccion = seccion;
     }
 
+    public AsignaturasProfesores(int idAsignatura, String nombreAsignatura) {
+        this.idAsignatura = idAsignatura;
+        this.nombreAsignatura = nombreAsignatura;
+    }
+
     public AsignaturasProfesores() {
     }
 

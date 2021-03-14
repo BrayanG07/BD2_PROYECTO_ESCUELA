@@ -33,11 +33,11 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         this.CONTROL = new GradoCalificacionesControl();
         this.listarAlumnos();
         this.listarAlumnosCalif();
-        this.cargarCategorias();
         txtNombreAlumno.enable(false);
         tabGeneral.setEnabledAt(1, false);
         this.accion = "guardar";
         txtIdCalificacion.setVisible(false);
+        this.cargarCategorias();
 
     }
 
@@ -68,7 +68,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         txtNota2.setText("");
         txtNota3.setText("");
         txtNota4.setText("");
-        btnGuardar.setText("Guardar");
+        this.accion = "guardar";
     }
 
     private void ocultarColumnas() {
@@ -517,6 +517,8 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
+            this.accion = "guardar";
+            btnGuardar.setText("Guardar");
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
@@ -562,7 +564,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Las notas ingresadas no deben ser mayor a 100, es obligatorio.", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         if (this.accion.equals("editar")) {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
@@ -645,49 +646,49 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     private void txtNota1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota1KeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
-        } 
+        }
     }//GEN-LAST:event_txtNota1KeyTyped
 
     private void txtNota3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota3KeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
-        } 
+        }
     }//GEN-LAST:event_txtNota3KeyTyped
 
     private void txtNota2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota2KeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
-        } 
+        }
     }//GEN-LAST:event_txtNota2KeyTyped
 
     private void txtNota4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota4KeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
-        } 
+        }
     }//GEN-LAST:event_txtNota4KeyTyped
 
 

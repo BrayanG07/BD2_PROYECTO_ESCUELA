@@ -81,7 +81,7 @@ public class frmTercerGradoA extends javax.swing.JInternalFrame {
         txtNota2.setText("");
         txtNota3.setText("");
         txtNota4.setText("");
-        btnGuardar.setText("Guardar");
+        this.accion = "guardar";
     }
 
     private void ocultarColumnas() {
