@@ -340,11 +340,35 @@ public class frmTercerGradoA extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Nota Primer Parcial");
 
+        txtNota1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota1KeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Nota Segundo Parcial");
+
+        txtNota2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota2KeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Nota Tercer Parcial");
 
+        txtNota3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota3KeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Nota Cuarto Parcial");
+
+        txtNota4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota4KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -617,6 +641,54 @@ public class frmTercerGradoA extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNota1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota1KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        } 
+    }//GEN-LAST:event_txtNota1KeyTyped
+
+    private void txtNota2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota2KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        } 
+    }//GEN-LAST:event_txtNota2KeyTyped
+
+    private void txtNota3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota3KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        } 
+    }//GEN-LAST:event_txtNota3KeyTyped
+
+    private void txtNota4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota4KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        } 
+    }//GEN-LAST:event_txtNota4KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
