@@ -5,6 +5,8 @@
  */
 package hn.uth.bd2.objetos;
 
+import java.util.Objects;
+
 /**
  *
  * @author Buddys
@@ -52,5 +54,38 @@ public class Grado {
     @Override
     public String toString() {
         return nombre +" "+seccion ;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        hash = 29 * hash + Objects.hashCode(this.seccion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Grado other = (Grado) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.seccion, other.seccion)) {
+            return false;
+        }
+        return true;
     }
 }

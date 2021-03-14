@@ -80,15 +80,16 @@ public class AsignaturasProfesoresDAO {
         return registros;
     }
     
-    public List<AsignaturasProfesores> listarAsignaturasId(int idProfesor) {
+    public List<AsignaturasProfesores> listarAsignaturasId(int idProfesor, int idCurso) {
         List<AsignaturasProfesores> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_LISTAR_ASIGN_ID(?,?)}");
+            insertando = CON.conectar().prepareCall("{call SP_LISTAR_ASIGN_ID(?,?,?)}");
             insertando.setInt(1, idProfesor);
-            insertando.registerOutParameter(2, OracleTypes.CURSOR);
+            insertando.setInt(2, idCurso);
+            insertando.registerOutParameter(3, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
-            rs = (ResultSet) insertando.getObject(2);
+            rs = (ResultSet) insertando.getObject(3);
             while (rs.next()) {
                 registros.add(new AsignaturasProfesores(rs.getInt(1), rs.getString(2)));
             }
@@ -177,5 +178,26 @@ public class AsignaturasProfesoresDAO {
             CON.cerrarConexion();
         }
         return registros;
+    }
+    
+    public boolean eliminarDetalle(int idProfesor, int idGrado) {
+        respuesta = false;
+        try {
+            insertando = CON.conectar().prepareCall("{call ELIMINAR_PROF_ASIG_CUR(?,?)}");
+            insertando.setInt(1, idProfesor);
+            insertando.setInt(2, idGrado);
+
+            if (insertando.executeUpdate() > 0) {
+                respuesta = true;
+            }
+
+            insertando.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            insertando = null;
+            CON.cerrarConexion();
+        }
+        return respuesta;
     }
 }

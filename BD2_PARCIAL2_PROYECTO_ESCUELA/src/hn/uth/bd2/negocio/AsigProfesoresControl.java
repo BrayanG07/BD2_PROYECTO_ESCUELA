@@ -64,7 +64,7 @@ public class AsigProfesoresControl {
     public DefaultTableModel listarAsignaciones(String busqueda) {
         List<AsignaturasProfesores> lista = new ArrayList();
         lista.addAll(DATOS.listarAsignaturasAsignadas(busqueda));
-        
+
         String[] titulos = {"ID Profesor", "Profesor", "ID Asignatura", "Asignatura", "ID Grado", "Nombre", "Seccion"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
@@ -77,6 +77,22 @@ public class AsigProfesoresControl {
             registro[4] = Integer.toString(item.getIdGrado());
             registro[5] = item.getNombreGrado();
             registro[6] = item.getSeccion();
+            this.modeloTabla.addRow(registro);
+        }
+        return this.modeloTabla;
+    }
+
+    public DefaultTableModel listarAsignacionesId(int idProfesor, int idCurso) {
+        List<AsignaturasProfesores> lista = new ArrayList();
+        lista.addAll(DATOS.listarAsignaturasId(idProfesor, idCurso));
+
+        String[] titulos = {"ID", "Asignatura"};
+        this.modeloTabla = new DefaultTableModel(null, titulos);
+
+        String[] registro = new String[2];
+        for (AsignaturasProfesores item : lista) {
+            registro[0] = Integer.toString(item.getIdAsignatura());
+            registro[1] = item.getNombreAsignatura();
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
@@ -100,4 +116,13 @@ public class AsigProfesoresControl {
         }
         return items2;
     }
+
+    public String eliminarDetalle(int idProfesor, int idGrado) {
+        if (DATOS.eliminarDetalle(idProfesor, idGrado)) {
+            return "OK";
+        } else {
+            return "Error en el registro";
+        }
+    }
+
 }

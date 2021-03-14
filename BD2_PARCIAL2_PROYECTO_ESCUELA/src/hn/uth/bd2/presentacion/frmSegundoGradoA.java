@@ -517,6 +517,8 @@ public class frmSegundoGradoA extends javax.swing.JInternalFrame {
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
+            this.accion = "guardar";
+            btnGuardar.setText("Guardar");
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
