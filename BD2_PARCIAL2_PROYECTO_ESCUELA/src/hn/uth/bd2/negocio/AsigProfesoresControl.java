@@ -64,7 +64,7 @@ public class AsigProfesoresControl {
     public DefaultTableModel listarAsignaciones(String busqueda) {
         List<AsignaturasProfesores> lista = new ArrayList();
         lista.addAll(DATOS.listarAsignaturasAsignadas(busqueda));
-
+        
         String[] titulos = {"ID Profesor", "Profesor", "ID Asignatura", "Asignatura", "ID Grado", "Nombre", "Seccion"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 

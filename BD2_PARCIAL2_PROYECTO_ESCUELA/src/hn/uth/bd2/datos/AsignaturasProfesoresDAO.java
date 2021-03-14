@@ -96,8 +96,6 @@ public class AsignaturasProfesoresDAO {
             if (insertando.getInt(4) == 1) {
                 respuesta = false;
                 JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Asignaciones registradas correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
 
             insertando.close();
@@ -114,7 +112,7 @@ public class AsignaturasProfesoresDAO {
         List<AsignaturasProfesores> registros = new ArrayList();
         try {
             insertando = CON.conectar().prepareCall("{call SP_ASIGNATURA_LISTA(?,?)}");
-            insertando.setString(1, "%" + busqueda + "%");
+            insertando.setString(1, busqueda);
             insertando.registerOutParameter(2, OracleTypes.CURSOR);
             insertando.executeUpdate();
 

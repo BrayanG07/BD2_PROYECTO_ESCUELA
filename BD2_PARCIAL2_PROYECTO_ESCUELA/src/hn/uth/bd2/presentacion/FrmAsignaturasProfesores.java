@@ -47,7 +47,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
     }
 
     private void listarTodo(String busqueda) {
-        tablaPrincipal.setModel(this.CONTROL.listarAsignaciones(""));
+        tablaPrincipal.setModel(this.CONTROL.listarAsignaciones(busqueda));
         TableRowSorter control = new TableRowSorter(tablaPrincipal.getModel());
         tablaPrincipal.setRowSorter(control);
         this.ocultarColumnas();
@@ -67,12 +67,11 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
-    
+
     private void cargarGrado() {
         DefaultComboBoxModel items = this.CONTROL.llenandoCombo();
         cboGrado.setModel(items);
     }
-
 
     private void busquedaIdProfesor(int id) {
         String respuesta = this.CONTROL.buscar(id);
@@ -540,7 +539,6 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
     private void btnRemueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemueveActionPerformed
         // TODO add your handling code here:
         if (seleccionQuitarTabla >= 0) {
-
             DefaultTableModel modelo = (DefaultTableModel) tablaAsignando.getModel();
             modelo.removeRow(seleccionQuitarTabla);
 
@@ -553,19 +551,24 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         int idProfesor = Integer.parseInt(txtIdProfesor.getText());
+        String respuesta = "";
         if (this.accion.equals("editar")) {
 
         } else {
-            Grado item = (Grado)cboGrado.getSelectedItem();
-            System.out.println(item.getId());
+            Grado item = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
-                System.out.println(this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId()));
+//                System.out.println(this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId()));
+                respuesta = this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId());
             }
-            this.listarTodo("");
-            tablaAsignaturas.setModel(this.CONTROL.listarAsignaturas());
-            tabGeneral.setEnabledAt(1, false);
-            tabGeneral.setEnabledAt(0, true);
-            tabGeneral.setSelectedIndex(0);
+            if (respuesta.equals("OK")) {
+                this.mensajeOk("Registros guardados correctamente");
+                this.listarTodo("");
+                this.limpiar();
+                tablaAsignaturas.setModel(this.CONTROL.listarAsignaturas());
+                tabGeneral.setEnabledAt(1, false);
+                tabGeneral.setEnabledAt(0, true);
+                tabGeneral.setSelectedIndex(0);
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
