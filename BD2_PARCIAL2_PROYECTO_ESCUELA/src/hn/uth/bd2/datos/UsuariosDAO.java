@@ -34,7 +34,7 @@ public class UsuariosDAO {
     public boolean insertar(Usuario objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_INSERTAR_USUARIO(?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_INSERTAR_USUARIO(?,?,?,?,?)}"); //LISTO
             insertando.setString(1, objeto.getUsuario());
             insertando.setString(2, objeto.getPassword());
             insertando.setInt(3, objeto.getIdRol());
@@ -50,7 +50,7 @@ public class UsuariosDAO {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
-
+            
             insertando.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -64,7 +64,7 @@ public class UsuariosDAO {
     public boolean actualizar(Usuario objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call ACTUALIZAR_USUARIO(?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.ACTUALIZAR_USUARIO(?,?,?,?,?,?)}"); //LISTO
             insertando.setInt(1, objeto.getIdUsuario());
             insertando.setString(2, objeto.getUsuario());
             insertando.setString(3, objeto.getPassword());
@@ -95,7 +95,7 @@ public class UsuariosDAO {
     public List<Rol> comboRoles() {
         List<Rol> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_LISTAR_ROLES(?)}");
+            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_LISTAR_ROLES(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
@@ -118,7 +118,7 @@ public class UsuariosDAO {
     public List<Usuario> listar(String busqueda) {
         List<Usuario> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_USUARIO_LISTA(?,?)}");
+            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_USUARIO_LISTA(?,?)}");
             insertando.setString(1, busqueda);
             insertando.registerOutParameter(2, OracleTypes.CURSOR);
             insertando.executeUpdate();
@@ -142,7 +142,7 @@ public class UsuariosDAO {
     public Usuario login(String usuario, String clave) {
         Usuario usu = null;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_LOGIN(?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_LOGIN(?,?,?)}");
             insertando.setString(1, usuario);
             insertando.setString(2, clave);
             insertando.registerOutParameter(3, OracleTypes.CURSOR);
