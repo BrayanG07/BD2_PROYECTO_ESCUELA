@@ -5,7 +5,6 @@
  */
 package hn.uth.bd2.datos;
 
-
 import hn.uth.bd2.database.Conexion;
 import hn.uth.bd2.objetos.Rol;
 import hn.uth.bd2.objetos.Usuario;
@@ -22,6 +21,7 @@ import oracle.jdbc.internal.OracleTypes;
  * @author Buddys
  */
 public class UsuariosDAO {
+
     private final Conexion CON;
     private CallableStatement insertando;
     private ResultSet rs;
@@ -30,7 +30,7 @@ public class UsuariosDAO {
     public UsuariosDAO() {
         this.CON = Conexion.getInstancia();
     }
-    
+
     public boolean insertar(Usuario objeto) {
         respuesta = false;
         try {
@@ -60,7 +60,7 @@ public class UsuariosDAO {
         }
         return respuesta;
     }
-    
+
     public boolean actualizar(Usuario objeto) {
         respuesta = false;
         try {
@@ -91,7 +91,7 @@ public class UsuariosDAO {
         }
         return respuesta;
     }
-    
+
     public List<Rol> comboRoles() {
         List<Rol> registros = new ArrayList();
         try {
@@ -114,7 +114,7 @@ public class UsuariosDAO {
         }
         return registros;
     }
-    
+
     public List<Usuario> listar(String busqueda) {
         List<Usuario> registros = new ArrayList();
         try {
@@ -125,7 +125,7 @@ public class UsuariosDAO {
 
             rs = (ResultSet) insertando.getObject(2);
             while (rs.next()) {
-                registros.add(new Usuario(rs.getInt(1), rs.getString(2),rs.getInt(3), rs.getString(4),rs.getString(5)));
+                registros.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
             }
             insertando.close();
             rs.close();
@@ -137,5 +137,30 @@ public class UsuariosDAO {
             CON.cerrarConexion();
         }
         return registros;
+    }
+
+    public Usuario login(String usuario, String clave) {
+        Usuario usu = null;
+        try {
+            insertando = CON.conectar().prepareCall("{call SP_LOGIN(?,?,?)}");
+            insertando.setString(1, usuario);
+            insertando.setString(2, clave);
+            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando.executeUpdate();
+
+            rs = (ResultSet) insertando.getObject(3);
+            while (rs.next()) {
+                usu = new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+            }
+            insertando.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error capa DAO"+e.getMessage());
+        } finally {
+            insertando = null;
+            rs = null;
+            CON.cerrarConexion();
+        }
+        return usu;
     }
 }

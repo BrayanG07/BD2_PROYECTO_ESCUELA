@@ -19,7 +19,53 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal() {
         initComponents();
+        this.cargarOcionesMenu();
     }
+
+    private void cargarOcionesMenu() {
+        if (hn.uth.bd2.negocio.Variables.rolNombre.equals("Administrador")) {
+            mnuAjustes.setEnabled(true);
+            mnuAlumnos.setEnabled(true);
+            mnuAsignaciones.setEnabled(true);
+            mnuAsignaturas.setEnabled(true);
+            mnuGrados.setEnabled(true);
+            mnuMatricula.setEnabled(true);
+            mnuProfesores.setEnabled(true);
+        } else if (hn.uth.bd2.negocio.Variables.rolNombre.equals("Secretaria")) {
+            mnuAjustes.setEnabled(false);
+            mnuAlumnos.setEnabled(true);
+            mnuAsignaciones.setEnabled(false);
+            mnuAsignaturas.setEnabled(true);
+            mnuGrados.setEnabled(false);
+            mnuMatricula.setEnabled(true);
+            mnuProfesores.setEnabled(false);
+        } else if (hn.uth.bd2.negocio.Variables.rolNombre.equals("Director")) {
+            mnuAjustes.setEnabled(true);
+            mnuAlumnos.setEnabled(true);
+            mnuAsignaciones.setEnabled(true);
+            mnuAsignaturas.setEnabled(true);
+            mnuGrados.setEnabled(true);
+            mnuMatricula.setEnabled(true);
+            mnuProfesores.setEnabled(true);
+        } else if (hn.uth.bd2.negocio.Variables.rolNombre.equals("Profesor")) {
+            mnuAjustes.setEnabled(false);
+            mnuAlumnos.setEnabled(true);
+            mnuAsignaciones.setEnabled(false);
+            mnuAsignaturas.setEnabled(false);
+            mnuGrados.setEnabled(true);
+            mnuMatricula.setEnabled(true);
+            mnuProfesores.setEnabled(false);
+        } else {
+            mnuAjustes.setEnabled(false);
+            mnuAlumnos.setEnabled(false);
+            mnuAsignaciones.setEnabled(false);
+            mnuAsignaturas.setEnabled(false);
+            mnuGrados.setEnabled(false);
+            mnuMatricula.setEnabled(false);
+            mnuProfesores.setEnabled(false);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +84,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         };
         menuBar = new javax.swing.JMenuBar();
-        jMenu23 = new javax.swing.JMenu();
+        mnuAlumnos = new javax.swing.JMenu();
+        mnuMatricula = new javax.swing.JMenu();
+        mnuGrados = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -58,9 +106,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        mnuProfesores = new javax.swing.JMenu();
+        mnuAsignaturas = new javax.swing.JMenu();
+        mnuAsignaciones = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        mnuAjustes = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,16 +118,24 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuBar.setPreferredSize(new java.awt.Dimension(199, 35));
 
-        jMenu23.setText("Grados");
-        jMenu23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenu23.addActionListener(new java.awt.event.ActionListener() {
+        mnuAlumnos.setText("Alumnos");
+        mnuAlumnos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBar.add(mnuAlumnos);
+
+        mnuMatricula.setText("Matricula");
+        mnuMatricula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBar.add(mnuMatricula);
+
+        mnuGrados.setText("Grados");
+        mnuGrados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuGrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu23ActionPerformed(evt);
+                mnuGradosActionPerformed(evt);
             }
         });
 
         jMenuItem1.setText("Preparatoria");
-        jMenu23.add(jMenuItem1);
+        mnuGrados.add(jMenuItem1);
 
         jMenu1.setText("Primer Grado");
 
@@ -97,7 +155,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenu23.add(jMenu1);
+        mnuGrados.add(jMenu1);
 
         jMenu2.setText("Segundo Grado");
 
@@ -117,7 +175,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
-        jMenu23.add(jMenu2);
+        mnuGrados.add(jMenu2);
 
         jMenu3.setText("Tercer Grado");
 
@@ -137,7 +195,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem8);
 
-        jMenu23.add(jMenu3);
+        mnuGrados.add(jMenu3);
 
         jMenu4.setText("Cuarto Grado");
 
@@ -157,7 +215,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
-        jMenu23.add(jMenu4);
+        mnuGrados.add(jMenu4);
 
         jMenu5.setText("Quinto Grado");
 
@@ -177,7 +235,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem12);
 
-        jMenu23.add(jMenu5);
+        mnuGrados.add(jMenu5);
 
         jMenu6.setText("Sexto Grado");
 
@@ -197,11 +255,20 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem14);
 
-        jMenu23.add(jMenu6);
+        mnuGrados.add(jMenu6);
 
-        menuBar.add(jMenu23);
+        menuBar.add(mnuGrados);
 
-        jMenu7.setText("Profesores");
+        mnuProfesores.setText(" Profesores");
+        mnuProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBar.add(mnuProfesores);
+
+        mnuAsignaturas.setText("Asignaturas");
+        mnuAsignaturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuBar.add(mnuAsignaturas);
+
+        mnuAsignaciones.setText("Asignaciones");
+        mnuAsignaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenuItem2.setText("Asignar Clases");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -209,11 +276,12 @@ public class frmPrincipal extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem2);
+        mnuAsignaciones.add(jMenuItem2);
 
-        menuBar.add(jMenu7);
+        menuBar.add(mnuAsignaciones);
 
-        jMenu8.setText("Usuario");
+        mnuAjustes.setText("Ajustes");
+        mnuAjustes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenuItem15.setText("Usuario");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -221,9 +289,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                 jMenuItem15ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem15);
+        mnuAjustes.add(jMenuItem15);
 
-        menuBar.add(jMenu8);
+        menuBar.add(mnuAjustes);
 
         setJMenuBar(menuBar);
 
@@ -241,9 +309,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu23ActionPerformed
+    private void mnuGradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGradosActionPerformed
 
-    }//GEN-LAST:event_jMenu23ActionPerformed
+    }//GEN-LAST:event_mnuGradosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -382,13 +450,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu23;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -405,6 +470,13 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu mnuAjustes;
+    private javax.swing.JMenu mnuAlumnos;
+    private javax.swing.JMenu mnuAsignaciones;
+    private javax.swing.JMenu mnuAsignaturas;
+    private javax.swing.JMenu mnuGrados;
+    private javax.swing.JMenu mnuMatricula;
+    private javax.swing.JMenu mnuProfesores;
     // End of variables declaration//GEN-END:variables
 
 }

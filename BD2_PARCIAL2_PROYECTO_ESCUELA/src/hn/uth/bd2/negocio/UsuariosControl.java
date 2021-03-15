@@ -5,11 +5,7 @@
  */
 package hn.uth.bd2.negocio;
 
-import hn.uth.bd2.datos.GradoCalificacionesDAO;
 import hn.uth.bd2.datos.UsuariosDAO;
-import hn.uth.bd2.objetos.AsignaturaCalificacion;
-import hn.uth.bd2.objetos.GradoCalificaiones;
-import hn.uth.bd2.objetos.ProfesoresCalificacion;
 import hn.uth.bd2.objetos.Rol;
 import hn.uth.bd2.objetos.Usuario;
 import java.util.ArrayList;
@@ -52,7 +48,7 @@ public class UsuariosControl {
         }
         return this.modeloTabla;
     }
-    
+
     public DefaultComboBoxModel llenandoRoles() {
         DefaultComboBoxModel items = new DefaultComboBoxModel();
         List<Rol> listaRoles = new ArrayList();
@@ -64,7 +60,7 @@ public class UsuariosControl {
         return items;
     }
 
-    public String insertar(String  usuario, String password, int idRol) {
+    public String insertar(String usuario, String password, int idRol) {
         respuesta = "error";
         objeto.setUsuario(usuario);
         objeto.setPassword(password);
@@ -83,6 +79,19 @@ public class UsuariosControl {
         objeto.setIdRol(idRol);
         if (DATOS.actualizar(objeto)) {
             return "OK";
+        }
+        return respuesta;
+    }
+
+    public String login(String usuario, String clave) {
+        String respuesta = "0";
+        Usuario usu = this.DATOS.login(usuario, clave);
+        if (usu != null) {
+            Variables.usuarioId = usu.getIdUsuario();
+            Variables.rolId = usu.getIdRol();
+            Variables.rolNombre = usu.getNombreRol();
+            Variables.usuarioLogin = usu.getUsuario();
+            respuesta = "1";
         }
         return respuesta;
     }
