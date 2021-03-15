@@ -36,7 +36,7 @@ public class AsignaturasProfesoresDAO {
     public List<Profesores> busquedaProfesor(int idProfesor) {
         List<Profesores> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_BUSQUEDA_ID_PROFESOR(?,?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_BUSQUEDA_ID_PROFESOR(?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.registerOutParameter(2, OracleTypes.CURSOR);
             insertando.executeUpdate();
@@ -60,7 +60,7 @@ public class AsignaturasProfesoresDAO {
     public List<Asignaturas> listarAsignaturas() {
         List<Asignaturas> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_ASIGNATURA(?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_ASIGNATURA(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
@@ -83,7 +83,7 @@ public class AsignaturasProfesoresDAO {
     public List<AsignaturasProfesores> listarAsignaturasId(int idProfesor, int idCurso) {
         List<AsignaturasProfesores> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_LISTAR_ASIGN_ID(?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_LISTAR_ASIGN_ID(?,?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.setInt(2, idCurso);
             insertando.registerOutParameter(3, OracleTypes.CURSOR);
@@ -108,7 +108,7 @@ public class AsignaturasProfesoresDAO {
     public boolean insertarAsignaturaProfe(int idProfesor, int idAsignatura, int idGrado) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_INSERTAR_ASIG_PROFESORES(?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_INSERTAR_ASIG_PROFESORES(?,?,?,?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.setInt(2, idAsignatura);
             insertando.setInt(3, idGrado);
@@ -136,7 +136,7 @@ public class AsignaturasProfesoresDAO {
     public List<AsignaturasProfesores> listarAsignaturasAsignadas(String busqueda) {
         List<AsignaturasProfesores> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_ASIGNATURA_LISTA(?,?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_ASIGNATURA_LISTA(?,?)}");
             insertando.setString(1, busqueda);
             insertando.registerOutParameter(2, OracleTypes.CURSOR);
             insertando.executeUpdate();
@@ -160,7 +160,7 @@ public class AsignaturasProfesoresDAO {
     public List<Grado> listarGrado() {
         List<Grado> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_GRADOS_LISTA(?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_GRADOS_LISTA(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
@@ -183,7 +183,7 @@ public class AsignaturasProfesoresDAO {
     public boolean eliminarDetalle(int idProfesor, int idGrado) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call ELIMINAR_PROF_ASIG_CUR(?,?)}");
+            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.ELIMINAR_PROF_ASIG_CUR(?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.setInt(2, idGrado);
 
