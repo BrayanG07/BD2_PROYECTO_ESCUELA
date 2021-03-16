@@ -137,7 +137,7 @@ public class GradoCalificacionesDAO {
     public boolean insertar(GradoCalificaiones objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.INSERTAR_CALIFICACION(?,?,?,?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.INSERTAR_CALIFICACIONES(?,?,?,?,?,?,?,?,?)}");
             insertando.setDouble(1, objeto.getNota1());
             insertando.setDouble(2, objeto.getNota2());
             insertando.setDouble(3, objeto.getNota3());
