@@ -33,7 +33,7 @@ public class MatriculaDAO {
     public List<AnioEscolar> listarAnio() {
         List<AnioEscolar> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_COMBO_LISTAR_ANIO(?)}");
+            insertando = CON.conectar().prepareCall("{call MATRICULA_ALUMNO.SP_COMBO_LISTAR_ANIO(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
@@ -56,7 +56,7 @@ public class MatriculaDAO {
     public boolean insertar(MatriculaAlumno objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_INSERTAR_MATRICULA_ALUMNO(?,?,?,?,?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call PARAMETROS_APP.SP_INSERTAR_MATRICULA_ALUMNO(?,?,?,?,?,?,?,?,?,?)}");
             insertando.setString(1, objeto.getNombres());
             insertando.setString(2, objeto.getApellidos());
             insertando.setString(3, objeto.getRtn());
@@ -91,7 +91,7 @@ public class MatriculaDAO {
     public List<MatriculaAlumno> listarMatricula(String busqueda) {
         List<MatriculaAlumno> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call SP_LISTAR_MATRICULA(?,?)}");
+            insertando = CON.conectar().prepareCall("{call MATRICULA_ALUMNO.SP_LISTAR_MATRICULA(?,?)}");
             insertando.setString(1, busqueda);
             insertando.registerOutParameter(2, OracleTypes.CURSOR);
             insertando.executeUpdate();
@@ -115,7 +115,7 @@ public class MatriculaDAO {
     public boolean actualizar(MatriculaAlumno objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call SP_ACTUALIZAR_MATRICULA(?,?,?,?,?,?,?,?,?,?,?,?)}"); //LISTO
+            insertando = CON.conectar().prepareCall("{call MATRICULA_ALUMNO.SP_ACTUALIZAR_MATRICULA(?,?,?,?,?,?,?,?,?,?,?,?)}"); //LISTO
             insertando.setInt(1, objeto.getIdMatricula());
             insertando.setInt(2, objeto.getIdAlumno());
             insertando.setString(3, objeto.getNombres());
