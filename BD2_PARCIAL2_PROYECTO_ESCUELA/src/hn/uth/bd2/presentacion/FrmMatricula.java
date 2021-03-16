@@ -9,6 +9,7 @@ import hn.uth.bd2.negocio.AsigProfesoresControl;
 import hn.uth.bd2.negocio.MatriculaControl;
 import hn.uth.bd2.objetos.AnioEscolar;
 import hn.uth.bd2.objetos.Grado;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -65,14 +66,26 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         tablaListado.getColumnModel().getColumn(1).setMinWidth(0);
         tablaListado.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
         tablaListado.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-        tablaListado.getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaListado.getColumnModel().getColumn(4).setMinWidth(0);
-        tablaListado.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaListado.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-        tablaListado.getColumnModel().getColumn(6).setMaxWidth(0);
-        tablaListado.getColumnModel().getColumn(6).setMinWidth(0);
-        tablaListado.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
-        tablaListado.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(5).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(8).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(8).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(10).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(10).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(11).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(11).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(12).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(12).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(12).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(12).setMinWidth(0);
     }
     
     private void irListado() {
@@ -172,6 +185,11 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -276,6 +294,8 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         jLabel8.setText("Grado");
 
         jLabel9.setText("Fecha");
+
+        txtFecha.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -391,6 +411,11 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(85, 28));
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -501,7 +526,14 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
             return;
         }
         if (this.accion.equals("editar")) {
-            
+            AnioEscolar ae = (AnioEscolar) cboAnioEscolar.getSelectedItem();
+            Grado gd = (Grado) cboGrado.getSelectedItem();
+            java.util.Date fecha = txtFecha.getDate();
+            java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+            respuesta = this.CONTROL.actualizar(Integer.parseInt(txtIdMatricula.getText()), Integer.parseInt(txtIdAlumno.getText()), txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), txtRtn.getText(), txtTelefono.getText(), ae.getId(), gd.getId(), fechaSQL);
+            this.listar("");
+            this.limpiar();
+            irListado();
         } else {
             AnioEscolar ae = (AnioEscolar) cboAnioEscolar.getSelectedItem();
             Grado gd = (Grado) cboGrado.getSelectedItem();
@@ -520,6 +552,57 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.listar(txtBusqueda.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        if (tablaListado.getSelectedRowCount() == 1) {
+            String idMatricula = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 0));
+            String idAlumno = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 1));
+            String nombre = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 2));
+            String apellido = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 3));
+            String rtn = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 4));
+            int idGrado = Integer.parseInt(String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 5)));
+            String nombreGrado = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 6));
+            String seccion = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 7));
+            int idAnioEscolar = Integer.parseInt(String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 8)));
+            String anio = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 9));
+            String telefono = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 10));
+            String direccion = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 11));
+            String fecha = String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(), 12));
+
+            Grado r = new Grado(idGrado, nombreGrado,seccion);
+            cboGrado.setSelectedItem(r);
+            AnioEscolar ae = new AnioEscolar(idAnioEscolar, anio);
+            cboAnioEscolar.setSelectedItem(ae);
+            txtIdAlumno.setText(idAlumno);
+            txtIdMatricula.setText(idMatricula);
+            txtNombre.setText(nombre);
+            txtApellido.setText(apellido);
+            txtTelefono.setText(telefono);
+            txtDireccion.setText(direccion);
+            txtRtn.setText(rtn);
+            
+            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date fechaN = null;
+            try {
+                fechaN = formatoDelTexto.parse(fecha);
+                txtFecha.setDate(fechaN);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            irMantenimiento();
+            this.accion = "editar";
+            btnGuardar.setText("Editar");
+        } else {
+            this.mensajeError("Debes seleccionar un registro para poder editar");
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        this.limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,11 +24,12 @@ public class MatriculaAlumno {
     private String rtn;
     private String direccion;
     private String telefono;
+    private String seccion;
 
     public MatriculaAlumno() {
     }
 
-    public MatriculaAlumno(int idMatricula, int idAlumno, String nombres, String apellidos, String rtn,int idNivelEducativo, String grado, int idAnioEscolar, String anioEscolar) {
+    public MatriculaAlumno(int idMatricula, int idAlumno, String nombres, String apellidos, String rtn,int idNivelEducativo, String grado, String seccion, int idAnioEscolar, String anioEscolar, String telefono, String direccion, Date fecha) {
         this.idMatricula = idMatricula;
         this.idAnioEscolar = idAnioEscolar;
         this.anioEscolar = anioEscolar;
@@ -38,6 +39,18 @@ public class MatriculaAlumno {
         this.nombres = nombres;
         this.rtn = rtn;
         this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.fecha = fecha;
+        this.seccion = seccion;
+    }
+
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
     }
 
     public int getIdMatricula() {

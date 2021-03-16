@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Buddys
  */
 public class MatriculaControl {
+
     private final MatriculaDAO DATOS;
     private MatriculaAlumno objeto;
     private AnioEscolar objAnio;
@@ -31,7 +32,7 @@ public class MatriculaControl {
         this.objeto = new MatriculaAlumno();
         this.objAnio = new AnioEscolar();
     }
-    
+
     public DefaultComboBoxModel llenandoComboAnio() {
         DefaultComboBoxModel items2 = new DefaultComboBoxModel();
         List<AnioEscolar> lista = new ArrayList();
@@ -42,7 +43,7 @@ public class MatriculaControl {
         }
         return items2;
     }
-    
+
     public String insertar(String nombre, String apellido, String rtn, String direccion, String telefono, Date fecha, int idAnioEscolar, int idCurso) {
         respuesta = "error";
         objeto.setNombres(nombre);
@@ -58,27 +59,50 @@ public class MatriculaControl {
         }
         return respuesta;
     }
-    
+
     public DefaultTableModel listar(String busqueda) {
         List<MatriculaAlumno> lista = new ArrayList();
         lista.addAll(DATOS.listarMatricula(busqueda));
 
-        String[] titulos = {"Id Matricula", "ID Alumno", "Alumno", "RTN", "ID Grado", "Grado", "ID Anio Escolar", "Año Escolar"};
+        String[] titulos = {"Id Matricula", "ID Alumno", "Nombres", "Apellidos", "RTN", "ID Grado", "Grado", "Seccion", "ID Anio Escolar", "Año Escolar", "Telefono", "Direccion", "Fecha"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
-        String[] registro = new String[8];
+        String[] registro = new String[13];
 
         for (MatriculaAlumno item : lista) {
             registro[0] = Integer.toString(item.getIdMatricula());
             registro[1] = Integer.toString(item.getIdAlumno());
-            registro[2] = item.getNombres()+" "+item.getApellidos();
-            registro[3] = item.getRtn();
-            registro[4] = Integer.toString(item.getIdNivelEducativo());
-            registro[5] = item.getGrado();
-            registro[6] = Integer.toString(item.getIdAnioEscolar());
-            registro[7] = item.getAnioEscolar();
+            registro[2] = item.getNombres();
+            registro[3] = item.getApellidos();
+            registro[4] = item.getRtn();
+            registro[5] = Integer.toString(item.getIdNivelEducativo());
+            registro[6] = item.getGrado();
+            registro[7] = item.getSeccion();
+            registro[8] = Integer.toString(item.getIdAnioEscolar());
+            registro[9] = item.getAnioEscolar();
+            registro[10] = item.getTelefono();
+            registro[11] = item.getDireccion();
+            registro[12] = String.valueOf(item.getFecha());
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
+    }
+
+    public String actualizar(int idMatricula, int idAlumno, String nombre, String apellido, String direccion, String rtn, String telefono, int idAnioEscolar, int idCurso, Date fecha) {
+        respuesta = "error";
+        objeto.setIdMatricula(idMatricula);
+        objeto.setIdAlumno(idAlumno);
+        objeto.setNombres(nombre);
+        objeto.setApellidos(apellido);
+        objeto.setDireccion(direccion);
+        objeto.setRtn(rtn);
+        objeto.setTelefono(telefono);
+        objeto.setIdAnioEscolar(idAnioEscolar);
+        objeto.setIdNivelEducativo(idCurso);
+        objeto.setFecha(fecha);
+        if (DATOS.actualizar(objeto)) {
+            return "OK";
+        }
+        return respuesta;
     }
 }
