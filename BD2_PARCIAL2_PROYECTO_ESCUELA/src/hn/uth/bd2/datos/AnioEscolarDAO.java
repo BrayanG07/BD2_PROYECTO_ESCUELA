@@ -6,7 +6,7 @@
 package hn.uth.bd2.datos;
 
 import hn.uth.bd2.database.Conexion;
-import hn.uth.bd2.objetos.Rol;
+import hn.uth.bd2.objetos.AnioEscolar;
 import hn.uth.bd2.objetos.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -20,24 +20,24 @@ import oracle.jdbc.internal.OracleTypes;
  *
  * @author Buddys
  */
-public class UsuariosDAO {
+public class AnioEscolarDAO {
 
     private final Conexion CON;
     private CallableStatement insertando;
     private ResultSet rs;
     private boolean respuesta;
 
-    public UsuariosDAO() {
+    public AnioEscolarDAO() {
         this.CON = Conexion.getInstancia();
     }
 
-    public boolean insertar(Usuario objeto) {
+    public boolean insertar(AnioEscolar objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_INSERTAR_USUARIO(?,?,?,?,?)}"); //LISTO
-            insertando.setString(1, objeto.getUsuario());
-            insertando.setString(2, objeto.getPassword());
-            insertando.setInt(3, objeto.getIdRol());
+            insertando = CON.conectar().prepareCall("{call PARAMETROS_APP.SP_INSERTAR_ANIO_ESCOLAR(?,?,?,?,?)}"); //LISTO
+            insertando.setDate(1, objeto.getFecha());
+            insertando.setDate(2, objeto.getFechaInicio());
+            insertando.setDate(3, objeto.getFechaFin());
             insertando.registerOutParameter(4, OracleTypes.INTEGER);
             insertando.registerOutParameter(5, OracleTypes.VARCHAR);
 
@@ -48,7 +48,7 @@ public class UsuariosDAO {
                 respuesta = false;
                 JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
             
             insertando.close();
@@ -61,14 +61,14 @@ public class UsuariosDAO {
         return respuesta;
     }
 
-    public boolean actualizar(Usuario objeto) {
+    public boolean actualizar(AnioEscolar objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.ACTUALIZAR_USUARIO(?,?,?,?,?,?)}"); //LISTO
-            insertando.setInt(1, objeto.getIdUsuario());
-            insertando.setString(2, objeto.getUsuario());
-            insertando.setString(3, objeto.getPassword());
-            insertando.setInt(4, objeto.getIdRol());
+            insertando = CON.conectar().prepareCall("{call ANIO_ESCOLARR.SP_ACTUALIZAR_ANIO_ESCOLAR(?,?,?,?,?,?)}"); //LISTO
+            insertando.setInt(1, objeto.getId());
+            insertando.setDate(2, objeto.getFecha());
+            insertando.setDate(3, objeto.getFechaInicio());
+            insertando.setDate(4, objeto.getFechaFin());
             insertando.registerOutParameter(5, OracleTypes.INTEGER);
             insertando.registerOutParameter(6, OracleTypes.VARCHAR);
 
@@ -79,7 +79,7 @@ public class UsuariosDAO {
                 respuesta = false;
                 JOptionPane.showMessageDialog(null, insertando.getString(6), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Anio Escolar actualizado correctamente", "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
 
             insertando.close();
@@ -92,16 +92,16 @@ public class UsuariosDAO {
         return respuesta;
     }
 
-    public List<Rol> comboRoles() {
-        List<Rol> registros = new ArrayList();
+    public List<AnioEscolar> listar() {
+        List<AnioEscolar> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_LISTAR_ROLES(?)}");
+            insertando = CON.conectar().prepareCall("{call ANIO_ESCOLARR.SP_LISTAR_ANIO_ESCOLAR(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
             rs = (ResultSet) insertando.getObject(1);
             while (rs.next()) {
-                registros.add(new Rol(rs.getInt(1), rs.getString(2)));
+                registros.add(new AnioEscolar(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4)));
             }
             insertando.close();
             rs.close();
@@ -113,54 +113,5 @@ public class UsuariosDAO {
             CON.cerrarConexion();
         }
         return registros;
-    }
-
-    public List<Usuario> listar(String busqueda) {
-        List<Usuario> registros = new ArrayList();
-        try {
-            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_USUARIO_LISTA(?,?)}");
-            insertando.setString(1, busqueda);
-            insertando.registerOutParameter(2, OracleTypes.CURSOR);
-            insertando.executeUpdate();
-
-            rs = (ResultSet) insertando.getObject(2);
-            while (rs.next()) {
-                registros.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
-            }
-            insertando.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            insertando = null;
-            rs = null;
-            CON.cerrarConexion();
-        }
-        return registros;
-    }
-
-    public Usuario login(String usuario, String clave) {
-        Usuario usu = null;
-        try {
-            insertando = CON.conectar().prepareCall("{call USUARIOS_DB.SP_LOGIN(?,?,?)}");
-            insertando.setString(1, usuario);
-            insertando.setString(2, clave);
-            insertando.registerOutParameter(3, OracleTypes.CURSOR);
-            insertando.executeUpdate();
-
-            rs = (ResultSet) insertando.getObject(3);
-            while (rs.next()) {
-                usu = new Usuario(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-            }
-            insertando.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error capa DAO"+e.getMessage());
-        } finally {
-            insertando = null;
-            rs = null;
-            CON.cerrarConexion();
-        }
-        return usu;
     }
 }

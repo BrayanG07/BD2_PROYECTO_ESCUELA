@@ -5,6 +5,7 @@
  */
 package hn.uth.bd2.objetos;
 
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -14,13 +15,47 @@ import java.util.Objects;
 public class AnioEscolar {
     private int id;
     private String anio;
+    private Date fecha; 
+    private Date fechaInicio; 
+    private Date fechaFin; 
 
     public AnioEscolar() {
+    }
+
+    public AnioEscolar(int id, Date fecha, Date fechaInicio, Date fechaFin) {
+        this.id = id;
+        this.fecha = fecha;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public AnioEscolar(int id, String anio) {
         this.id = id;
         this.anio = anio;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public int getId() {

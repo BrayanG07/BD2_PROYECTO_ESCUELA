@@ -5,95 +5,69 @@
  */
 package hn.uth.bd2.negocio;
 
-import hn.uth.bd2.datos.UsuariosDAO;
-import hn.uth.bd2.objetos.Rol;
+import hn.uth.bd2.datos.AnioEscolarDAO;
+import hn.uth.bd2.objetos.AnioEscolar;
 import hn.uth.bd2.objetos.Usuario;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Buddys
  */
-public class UsuariosControl {
+public class AnioEscolarControl {
 
-    private final UsuariosDAO DATOS;
-    private Usuario objeto;
+    private final AnioEscolarDAO DATOS;
+    private AnioEscolar objeto;
     private DefaultTableModel modeloTabla;
     private String respuesta;
 
-    public UsuariosControl() {
-        this.DATOS = new UsuariosDAO();
-        this.objeto = new Usuario();
+    public AnioEscolarControl() {
+        this.DATOS = new AnioEscolarDAO();
+        this.objeto = new AnioEscolar();
     }
 
-    public DefaultTableModel listar(String busqueda) {
-        List<Usuario> lista = new ArrayList();
-        lista.addAll(DATOS.listar(busqueda));
+    public DefaultTableModel listar() {
+        List<AnioEscolar> lista = new ArrayList();
+        lista.addAll(DATOS.listar());
 
-        String[] titulos = {"Id Usuario", "Usuario", "ID rol", "Rol", "Password"};
+        String[] titulos = {"Id Anio Escolar", "Año", "Fecha Inicio", "Fecha Fin"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
-        String[] registro = new String[5];
+        String[] registro = new String[4];
 
-        for (Usuario item : lista) {
-            registro[0] = Integer.toString(item.getIdUsuario());
-            registro[1] = item.getUsuario();
-            registro[2] = Integer.toString(item.getIdRol());
-            registro[3] = item.getNombreRol();
-            registro[4] = item.getPassword();
+        for (AnioEscolar item : lista) {
+            registro[0] = Integer.toString(item.getId());
+            registro[1] = item.getFecha().toString();
+            registro[2] = item.getFechaInicio().toString();
+            registro[3] = item.getFechaFin().toString();
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
     }
 
-    public DefaultComboBoxModel llenandoRoles() {
-        DefaultComboBoxModel items = new DefaultComboBoxModel();
-        List<Rol> listaRoles = new ArrayList();
-        listaRoles = DATOS.comboRoles();
-
-        for (Rol objetoProfesores : listaRoles) {
-            items.addElement(new Rol(objetoProfesores.getId(), objetoProfesores.getNombre()));
-        }
-        return items;
-    }
-
-    public String insertar(String usuario, String password, int idRol) {
+    public String insertar(Date fecha, Date fechaInicio, Date fechaFin) {
         respuesta = "error";
-        objeto.setUsuario(usuario);
-        objeto.setPassword(password);
-        objeto.setIdRol(idRol);
+        objeto.setFecha(fecha);
+        objeto.setFechaInicio(fechaInicio);
+        objeto.setFechaFin(fechaFin);
         if (DATOS.insertar(objeto)) {
             return "OK";
         }
         return respuesta;
     }
 
-    public String actualizar(int idUsuario, String usuario, String password, int idRol) {
+    public String actualizar(int id, Date fecha, Date fechaInicio, Date fechaFin) {
         respuesta = "error";
-        objeto.setIdUsuario(idUsuario);
-        objeto.setUsuario(usuario);
-        objeto.setPassword(password);
-        objeto.setIdRol(idRol);
+        objeto.setId(id);
+        objeto.setFecha(fecha);
+        objeto.setFechaInicio(fechaInicio);
+        objeto.setFechaFin(fechaFin);
         if (DATOS.actualizar(objeto)) {
             return "OK";
         }
         return respuesta;
     }
-
-    public String login(String usuario, String clave) {
-        String respuesta = "0";
-        Usuario usu = this.DATOS.login(usuario, clave);
-        if (usu != null) {
-            Variables.usuarioId = usu.getIdUsuario();
-            Variables.rolId = usu.getIdRol();
-            Variables.rolNombre = usu.getNombreRol();
-            Variables.usuarioLogin = usu.getUsuario();
-            respuesta = "1";
-        }
-        return respuesta;
-    }
-
 }
