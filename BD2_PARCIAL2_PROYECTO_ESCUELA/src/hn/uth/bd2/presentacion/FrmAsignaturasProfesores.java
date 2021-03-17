@@ -597,6 +597,11 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        if (txtIdProfesor.getText().length() == 0) {
+            this.mensajeError("Debes ingresar un profesor para poder asignarle un grado y clases");
+            txtIdProfesor.requestFocus();
+            return;
+        }
         int idProfesor = Integer.parseInt(txtIdProfesor.getText());
         String respuesta = "";
         if (this.accion.equals("editar")) {

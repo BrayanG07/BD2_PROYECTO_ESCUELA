@@ -121,8 +121,6 @@ public class AsignaturasProfesoresDAO {
             if (insertando.getInt(4) == 1) {
                 respuesta = false;
                 JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
-            }else {
-                JOptionPane.showMessageDialog(null, insertando.getString(5), "Sistema Escolar", JOptionPane.INFORMATION_MESSAGE);
             }
 
             insertando.close();
