@@ -597,22 +597,27 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        if (txtIdProfesor.getText().length() == 0) {
+            this.mensajeError("Debes ingresar un profesor para poder asignarle un grado y clases");
+            txtIdProfesor.requestFocus();
+            return;
+        }
         int idProfesor = Integer.parseInt(txtIdProfesor.getText());
         String respuesta = "";
         if (this.accion.equals("editar")) {
             this.editar(idProfesor);
         } else {
-            boolean resp;
+            //boolean resp;
             Grado item = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
-                resp = this.validarAsignacionExistente(idProfesor, item.getId(), Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""));
-                if (resp) {
-                    this.mensajeError("El profesor ya esta impartiendo la clase de "+ tablaAsignando.getValueAt(i, 1) +" en el grado "+item.getNombre()+" "+item.getSeccion());
-                    txtIdProfesor.requestFocus();
-                    return;
-                }else{
+               // resp = this.validarAsignacionExistente(idProfesor, item.getId(), Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""));
+               // if (resp) {
+                  //  this.mensajeError("El profesor ya esta impartiendo la clase de "+ tablaAsignando.getValueAt(i, 1) +" en el grado "+item.getNombre()+" "+item.getSeccion());
+                    //txtIdProfesor.requestFocus();
+                 //   return;
+                //}else{
                     respuesta = this.CONTROL.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item.getId());
-                }
+                //}
             }
             if (respuesta.equals("OK")) {
                 this.mensajeOk("Registros guardados correctamente");

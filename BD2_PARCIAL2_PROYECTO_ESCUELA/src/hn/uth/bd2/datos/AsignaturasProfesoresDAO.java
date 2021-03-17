@@ -108,7 +108,7 @@ public class AsignaturasProfesoresDAO {
     public boolean insertarAsignaturaProfe(int idProfesor, int idAsignatura, int idGrado) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call PROFESORES_ASIG_CURSO_DB.SP_INSERTAR_ASIG_PROFESORES(?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call PARAMETROS_APP.INSERTAR_ASIGNACIONES(?,?,?,?,?)}");
             insertando.setInt(1, idProfesor);
             insertando.setInt(2, idAsignatura);
             insertando.setInt(3, idGrado);

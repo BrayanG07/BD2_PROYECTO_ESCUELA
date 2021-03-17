@@ -22,10 +22,10 @@ public class Grado {
         this.seccion = seccion;
     }
 
-    public Grado(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
+//    public Grado(int id, String nombre) {
+//        this.id = id;
+//        this.nombre = nombre;
+//    }
 
     public int getId() {
         return id;
