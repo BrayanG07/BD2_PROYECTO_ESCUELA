@@ -19,7 +19,7 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal() {
         initComponents();
-        //this.cargarOcionesMenu();
+        this.cargarOcionesMenu();
     }
 
     private void cargarOcionesMenu() {
