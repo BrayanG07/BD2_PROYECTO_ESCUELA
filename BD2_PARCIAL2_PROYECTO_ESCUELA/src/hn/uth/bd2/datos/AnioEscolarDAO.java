@@ -7,7 +7,6 @@ package hn.uth.bd2.datos;
 
 import hn.uth.bd2.database.Conexion;
 import hn.uth.bd2.objetos.AnioEscolar;
-import hn.uth.bd2.objetos.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
