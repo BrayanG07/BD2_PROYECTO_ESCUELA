@@ -7,13 +7,8 @@ package hn.uth.bd2.negocio;
 
 import hn.uth.bd2.datos.AsignaturasGradoDAO;
 import hn.uth.bd2.objetos.AsignaturaGrado;
-import hn.uth.bd2.objetos.Asignaturas;
-import hn.uth.bd2.objetos.AsignaturasProfesores;
-import hn.uth.bd2.objetos.Grado;
-import hn.uth.bd2.objetos.Profesores;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +27,6 @@ public class AsignaturasGradoControl {
         this.objeto = new AsignaturaGrado();
     }
 
-
     public DefaultTableModel listarTodo(String busqueda) {
         List<AsignaturaGrado> lista = new ArrayList();
         lista.addAll(DATOS.listarAsignaturasGrado(busqueda));
@@ -47,13 +41,29 @@ public class AsignaturasGradoControl {
             registro[2] = item.getSeccion();
             registro[3] = Integer.toString(item.getIdAsignatura());
             registro[4] = item.getAsignatura();
-            
+
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
     }
 
-    public String insertarAsignaturasGrado(int idGrado, int idAsignatura ) {
+    public DefaultTableModel listarAsignacionesTabla(int idGrado) {
+        List<AsignaturaGrado> lista = new ArrayList();
+        lista.addAll(DATOS.listarAsignaturasTabla(idGrado));
+
+        String[] titulos = {"ID", "Asignatura"};
+        this.modeloTabla = new DefaultTableModel(null, titulos);
+
+        String[] registro = new String[2];
+        for (AsignaturaGrado item : lista) {
+            registro[0] = Integer.toString(item.getIdAsignatura());
+            registro[1] = item.getAsignatura();
+            this.modeloTabla.addRow(registro);
+        }
+        return this.modeloTabla;
+    }
+
+    public String insertarAsignaturasGrado(int idGrado, int idAsignatura) {
         if (DATOS.insertarAsignaturaGrado(idGrado, idAsignatura)) {
             return "OK";
         } else {
@@ -61,12 +71,22 @@ public class AsignaturasGradoControl {
         }
     }
 
-    public String eliminarDetalle(int idProfesor, int idGrado) {
-        if (DATOS.eliminarDetalle(idProfesor, idGrado)) {
+    public String eliminarDetalle(int idNivelEducativo) {
+        if (DATOS.eliminarDetalle(idNivelEducativo)) {
             return "OK";
         } else {
             return "Error en el registro";
         }
+    }
+
+    public String actualizar(int idGrado, int idAsignatura) {
+        respuesta = "error";
+        objeto.setIdNivelEducativo(idGrado);
+        objeto.setIdAsignatura(idAsignatura);
+        if (DATOS.actualizar(objeto)) {
+            return "OK";
+        }
+        return respuesta;
     }
 
 }

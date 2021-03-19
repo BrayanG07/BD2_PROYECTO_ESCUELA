@@ -24,6 +24,12 @@ public class AsignaturaGrado {
         this.Asignatura = Asignatura;
     }
 
+    public AsignaturaGrado(int idAsignatura, String Asignatura) {
+        this.idAsignatura = idAsignatura;
+        this.Asignatura = Asignatura;
+    }
+    
+
     public AsignaturaGrado() {
     }
 

@@ -647,6 +647,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
             Grado g = new Grado(idGradoTabla, nombreGrado, seccion);
             cboGrado.setSelectedItem(g);
             this.listarAsignaturasId(idProfesor, idGradoTabla);
+            System.out.println("Ya se pusieron");
         } else {
             this.mensajeError("Debes seleccionar el registro del profesor que deseas modificar");
         }

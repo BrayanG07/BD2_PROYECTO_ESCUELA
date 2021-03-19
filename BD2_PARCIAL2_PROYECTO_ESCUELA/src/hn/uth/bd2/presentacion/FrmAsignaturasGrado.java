@@ -5,11 +5,9 @@
  */
 package hn.uth.bd2.presentacion;
 
-import hn.uth.bd2.datos.AsignaturasProfesoresDAO;
 import hn.uth.bd2.negocio.AsigProfesoresControl;
 import hn.uth.bd2.negocio.AsignaturasGradoControl;
 import hn.uth.bd2.objetos.Asignaturas;
-import hn.uth.bd2.objetos.AsignaturasProfesores;
 import hn.uth.bd2.objetos.Grado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -70,8 +68,8 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         tablaPrincipal.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
     }
 
-    private void listarAsignaturasId(int idProfesor, int idCurso) {
-        tablaAsignando.setModel(this.CONTROL_PROFE.listarAsignacionesId(idProfesor, idCurso));
+    private void listarAsignaturasAsig(int idGrado) {
+        tablaAsignando.setModel(this.CONTROL.listarAsignacionesTabla(idGrado));
     }
 
     private void cargarGrado() { //BIEN
@@ -99,23 +97,30 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         tablaAsignando.setModel(model);
         this.accion = "guardar";
     }
+    
+    private void irListado() {
+        tablaAsignaturas.setModel(this.CONTROL_PROFE.listarAsignaturas());
+        tabGeneral.setEnabledAt(1, false);
+        tabGeneral.setEnabledAt(0, true);
+        tabGeneral.setSelectedIndex(0);
+    }
 
-    private void editar(int idProfesor) {
-        String capturador = this.CONTROL_PROFE.eliminarDetalle(idProfesor, idGradoTabla);
+    private void editar() {
+        String capturador = "";
+        for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
+            capturador = this.CONTROL.eliminarDetalle(idGradoTabla);
+        }
         String detalle = "";
         if (capturador.equals("OK")) {
             Grado item2 = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
-                detalle = this.CONTROL_PROFE.insertarAsignaturasProf(idProfesor, Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""), item2.getId());
+                detalle = this.CONTROL.insertarAsignaturasGrado(item2.getId(), Integer.parseInt(tablaAsignando.getValueAt(i, 0) + ""));
             }
             if (detalle.equals("OK")) {
                 this.mensajeOk("Registros actualizados correctamente");
                 this.listarTodo("");
                 this.limpiar();
-                tablaAsignaturas.setModel(this.CONTROL_PROFE.listarAsignaturas());
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+                this.irListado();
             }
         }
     }
@@ -533,7 +538,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
 
         String respuesta = "";
         if (this.accion.equals("editar")) {
-            //this.editar(idProfesor);
+            this.editar();
         } else {
             Grado item = (Grado) cboGrado.getSelectedItem();
             for (int i = 0; i < tablaAsignando.getRowCount(); i++) {
@@ -543,36 +548,36 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
                 this.listarTodo("");
                 this.limpiar();
                 this.mensajeOk("Las asignaciones se registraron correctamente");
-                tablaAsignaturas.setModel(this.CONTROL_PROFE.listarAsignaturas());
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+                this.irListado();
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        if (tablaPrincipal.getSelectedRowCount() == 1) {
-            int idProfesor = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
-            String nombreProfesor = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 1));
-            idGradoTabla = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 4)));
-            String nombreGrado = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 5));
-            String seccion = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 6));
+        try {
+            if (tablaPrincipal.getSelectedRowCount() == 1) {
+                idGradoTabla = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 0)));
+                int idAsignatura = Integer.parseInt(String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 3)));
+                String nombreGrado = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 1));
+                String seccion = String.valueOf(tablaPrincipal.getValueAt(tablaPrincipal.getSelectedRow(), 2));
 
-//            txtIdProfesor.setText(Integer.toString(idProfesor));
-            Grado g = new Grado(idGradoTabla, nombreGrado, seccion);
-            cboGrado.setSelectedItem(g);
-            this.listarAsignaturasId(idProfesor, idGradoTabla);
-        } else {
-            this.mensajeError("Debes seleccionar el registro del profesor que deseas modificar");
+                Grado g = new Grado(idGradoTabla, nombreGrado, seccion);
+                cboGrado.setSelectedItem(g);
+                this.listarAsignaturasAsig(idGradoTabla);
+            } else {
+                this.mensajeError("Debes seleccionar el registro del profesor que deseas modificar");
+            }
+
+            tabGeneral.setEnabledAt(0, false);
+            tabGeneral.setEnabledAt(1, true);
+            tabGeneral.setSelectedIndex(1);
+            this.accion = "editar";
+            btnGuardar.setText("Editar");
+        } catch (Exception e) {
+            this.mensajeError(e.getMessage());
         }
 
-        tabGeneral.setEnabledAt(0, false);
-        tabGeneral.setEnabledAt(1, true);
-        tabGeneral.setSelectedIndex(1);
-        this.accion = "editar";
-        btnGuardar.setText("Editar");
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
