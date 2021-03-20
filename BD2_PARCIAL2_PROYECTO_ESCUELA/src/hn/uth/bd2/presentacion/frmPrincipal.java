@@ -156,6 +156,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         jMenuItem1.setText("Preparatoria");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         mnuGrados.add(jMenuItem1);
 
         jMenu1.setText("Primer Grado");
@@ -476,6 +481,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         escritorio.add(frm);
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frmPreparatoriaA frm = new frmPreparatoriaA();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
