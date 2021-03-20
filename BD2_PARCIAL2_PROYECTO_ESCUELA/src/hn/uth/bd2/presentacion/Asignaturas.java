@@ -24,6 +24,7 @@ public class Asignaturas extends javax.swing.JFrame {
     public Asignaturas() {
         initComponents();
         modelo = (DefaultTableModel) tabla.getModel();
+        this.setLocationRelativeTo(null);
     }
 
     public void limpiar() {
