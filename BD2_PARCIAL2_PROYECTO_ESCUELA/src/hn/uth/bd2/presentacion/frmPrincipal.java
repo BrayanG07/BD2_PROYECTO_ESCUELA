@@ -111,6 +111,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuProfesores = new javax.swing.JMenu();
         jMenuItem18 = new javax.swing.JMenuItem();
         mnuAsignaturas = new javax.swing.JMenu();
+        jMenuItem20 = new javax.swing.JMenuItem();
         mnuAsignaciones = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
@@ -300,6 +301,15 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuAsignaturas.setText("Asignaturas");
         mnuAsignaturas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jMenuItem20.setText("Asignaturas");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        mnuAsignaturas.add(jMenuItem20);
+
         menuBar.add(mnuAsignaturas);
 
         mnuAsignaciones.setText("Asignaciones");
@@ -489,6 +499,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        // TODO add your handling code here:
+        Asignaturas frm = new Asignaturas();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -545,6 +561,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
