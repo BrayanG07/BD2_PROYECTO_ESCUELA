@@ -42,11 +42,12 @@ public class Profesores extends javax.swing.JFrame {
         jcombo.setSelectedIndex(0);
     }
 
-    public void insertar() {
+    public boolean insertar() {
+        boolean banderin = true;    
         try {
             //
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call PROFESOR_DB.INSERTAR_PROFESOR(?,?,?,?,?,?)";
+            String sql = "call PARAMETROS_APP.SP_INSERTAR_PROFESOR(?,?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
 
             ps.setString(1, this.jnombre.getText());
@@ -55,14 +56,18 @@ public class Profesores extends javax.swing.JFrame {
             ps.setString(4, this.jdireccion.getText());
             ps.setString(5, this.jtelefono.getText());
             ps.setString(6, (String) this.jcombo.getSelectedItem());
-//            ps.setInt(6, Integer.parseInt((String) this.jcombo.getSelectedItem()));
+            ps.registerOutParameter(7, OracleTypes.VARCHAR);
             ps.execute();
+            if (ps.getString(7) != null) {
+                JOptionPane.showMessageDialog(null, ps.getString(7), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+                banderin = false;
+            }
             ps.close();
             cn.close();
-            JOptionPane.showMessageDialog(null, "REGISTRO INGRESADO CORRECTAMENTE", "FELICIDADES", 1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        return banderin;
     }
 
     //Metodo Borrar Profesor
@@ -95,11 +100,9 @@ public class Profesores extends javax.swing.JFrame {
             ps.setString(5, this.jdireccion.getText());
             ps.setString(6, this.jtelefono.getText());
             ps.setString(7, (String) this.jcombo.getSelectedItem());
-//            ps.setInt(7, Integer.parseInt((String) this.jcombo.getSelectedItem()));
             ps.execute();
             ps.close();
             cn.close();
-            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "FELICIDADES", 1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -502,8 +505,13 @@ public class Profesores extends javax.swing.JFrame {
 
     private void jborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jborrarActionPerformed
         // TODO add your handling code here:
-        insertar();
-        this.limpiar();
+        if (insertar()) {
+            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "FELICIDADES", 1);
+            this.limpiar();
+        }else {
+            jrtn.requestFocus();
+            return;
+        }
     }//GEN-LAST:event_jborrarActionPerformed
 
     private void jagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jagregarActionPerformed
