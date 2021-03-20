@@ -35,13 +35,16 @@ public class GradoCalificacionesDAO {
     public List<GradoCalificaiones> listar(String nombreGrado, String seccion) {
         List<GradoCalificaiones> lista = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call LISTA_ALUMNOSC(?,?,?)}");
+            java.util.Date d = new java.util.Date();
+            java.sql.Date date2 = new java.sql.Date(d.getTime());
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.LISTA_ALUMNOSC(?,?,?,?)}");
             insertando.setString(1, nombreGrado);
             insertando.setString(2, seccion);
-            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando.setDate(3, date2);
+            insertando.registerOutParameter(4, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
-            rs = (ResultSet) insertando.getObject(3);
+            rs = (ResultSet) insertando.getObject(4);
             while (rs.next()) {
                 lista.add(new GradoCalificaiones(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
@@ -62,7 +65,7 @@ public class GradoCalificacionesDAO {
         try {
             java.util.Date d = new java.util.Date();
             java.sql.Date date2 = new java.sql.Date(d.getTime());
-            insertando = CON.conectar().prepareCall("{call CURSOR_CALIFICACIONES(?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.CURSOR_CALIFICACIONES(?,?,?,?)}");
             insertando.setString(1, nombreGrado);
             insertando.setString(2, seccion);
             insertando.setDate(3, date2);
@@ -85,16 +88,14 @@ public class GradoCalificacionesDAO {
         return listaCalif;
     }
 
-    public List<ProfesoresCalificacion> comboProfesores(String grado, String seccion) {
+    public List<ProfesoresCalificacion> comboProfesores() {
         List<ProfesoresCalificacion> registros = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call COMBO_PROFESOR_LISTAR(?,?,?)}");
-            insertando.setString(1, grado);
-            insertando.setString(2, seccion);
-            insertando.registerOutParameter(3, OracleTypes.CURSOR);
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.COMBO_PROFESOR_LISTAR(?)}");
+            insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
-            rs = (ResultSet) insertando.getObject(3);
+            rs = (ResultSet) insertando.getObject(1);
             while (rs.next()) {
                 registros.add(new ProfesoresCalificacion(rs.getInt(1), rs.getString(2)));
             }
@@ -113,7 +114,7 @@ public class GradoCalificacionesDAO {
     public List<AsignaturaCalificacion> comboAsignaturas() {
         List<AsignaturaCalificacion> listaAsignaturas = new ArrayList();
         try {
-            insertando = CON.conectar().prepareCall("{call COMBO_ASIGNATURA_LISTAR(?)}");
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.COMBO_ASIGNATURA_LISTAR(?)}");
             insertando.registerOutParameter(1, OracleTypes.CURSOR);
             insertando.executeUpdate();
 
@@ -136,7 +137,7 @@ public class GradoCalificacionesDAO {
     public boolean insertar(GradoCalificaiones objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call INSERTAR_CALIFICACION(?,?,?,?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.INSERTAR_CALIFICACIONES(?,?,?,?,?,?,?,?,?)}");
             insertando.setDouble(1, objeto.getNota1());
             insertando.setDouble(2, objeto.getNota2());
             insertando.setDouble(3, objeto.getNota3());
@@ -170,7 +171,7 @@ public class GradoCalificacionesDAO {
     public boolean actualizar(GradoCalificaiones objeto) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call ACTUALIZAR_CALIFICACION(?,?,?,?,?,?,?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call GRADO_CALIFICACIONES.ACTUALIZAR_CALIFICACION(?,?,?,?,?,?,?,?,?,?)}");
             insertando.setInt(1, objeto.getIdCalificacion());
             insertando.setDouble(2, objeto.getNota1());
             insertando.setDouble(3, objeto.getNota2());

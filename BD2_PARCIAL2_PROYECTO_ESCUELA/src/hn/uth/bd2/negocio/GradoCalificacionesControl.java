@@ -83,10 +83,10 @@ public class GradoCalificacionesControl {
         return this.modeloTabla;
     }
 
-    public DefaultComboBoxModel llenandoProfesores(String grado, String seccion) {
+    public DefaultComboBoxModel llenandoProfesores() {
         DefaultComboBoxModel items = new DefaultComboBoxModel();
         List<ProfesoresCalificacion> listaProfesores = new ArrayList();
-        listaProfesores = DATOS.comboProfesores(grado, seccion);
+        listaProfesores = DATOS.comboProfesores();
 
         for (ProfesoresCalificacion objetoProfesores : listaProfesores) {
             items.addElement(new ProfesoresCalificacion(objetoProfesores.getId(), objetoProfesores.getNombreProfesores()));

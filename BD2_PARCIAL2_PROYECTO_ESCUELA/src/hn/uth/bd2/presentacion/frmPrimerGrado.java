@@ -5,10 +5,13 @@
  */
 package hn.uth.bd2.presentacion;
 
+import hn.uth.bd2.datos.GradoCalificacionesDAO;
 import hn.uth.bd2.negocio.GradoCalificacionesControl;
 import hn.uth.bd2.objetos.AsignaturaCalificacion;
+import hn.uth.bd2.objetos.GradoCalificaiones;
 import hn.uth.bd2.objetos.ProfesoresCalificacion;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -30,11 +33,12 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         this.CONTROL = new GradoCalificacionesControl();
         this.listarAlumnos();
         this.listarAlumnosCalif();
-        this.cargarCategorias();
         txtNombreAlumno.enable(false);
         tabGeneral.setEnabledAt(1, false);
         this.accion = "guardar";
         txtIdCalificacion.setVisible(false);
+        this.cargarCategorias();
+
     }
 
     private void listarAlumnos() {
@@ -51,7 +55,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
     }
 
     private void cargarCategorias() {
-        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores("Primer Grado", "A");
+        DefaultComboBoxModel items = this.CONTROL.llenandoProfesores();
         cboProfesor.setModel(items);
         DefaultComboBoxModel items2 = this.CONTROL.llenandoAsignaturas();
         cboAsignatura.setModel(items2);
@@ -64,6 +68,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         txtNota2.setText("");
         txtNota3.setText("");
         txtNota4.setText("");
+        this.accion = "guardar";
     }
 
     private void ocultarColumnas() {
@@ -79,6 +84,20 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         tablaCalificados.getColumnModel().getColumn(3).setMinWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
         tablaCalificados.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
+
+    private boolean validarAlumnoCalificado(int idAlumno, int idAsignatura) {
+        boolean banderin = false;
+        GradoCalificacionesDAO grado = new GradoCalificacionesDAO();
+        List<GradoCalificaiones> listaCalif = new ArrayList();
+        listaCalif.addAll(grado.listarCalificados("Primer Grado", "A"));
+        for (GradoCalificaiones gradoCalificaiones : listaCalif) {
+            if (gradoCalificaiones.getIdAlumno() == idAlumno && gradoCalificaiones.getIdAsignatura() == idAsignatura) {
+                banderin = true;
+                return banderin;
+            }
+        }
+        return banderin;
     }
 
     private void mensajeError(String mensaje) {
@@ -139,8 +158,16 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Primer Grado Seccion A");
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Alumnos"));
+        tabGeneral.setBackground(new java.awt.Color(255, 255, 255));
+        tabGeneral.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista Alumnos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        tablaAlumnos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -152,6 +179,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         tablaAlumnos.setRowHeight(20);
         jScrollPane1.setViewportView(tablaAlumnos);
 
+        btnCalificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCalificar.setText("Calificar");
         btnCalificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +194,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnCalificar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -182,8 +210,11 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alumnos Calificados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11))); // NOI18N
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista Alumnos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        tablaCalificados.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaCalificados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -200,6 +231,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tablaCalificados);
 
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnEditar.setText("Editar Calificacion");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +246,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(btnEditar)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -224,7 +256,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -253,17 +285,32 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
 
         tabGeneral.addTab("Alumnos", jPanel1);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Alumno");
 
+        txtNombreAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Profesor");
 
+        cboProfesor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Asignatura");
 
+        cboAsignatura.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("ID Alumno:");
 
         lblIdAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtIdCalificacion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -282,10 +329,9 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(lblIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(98, 98, 98))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(txtIdCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(158, 158, 158)))
                         .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(txtNombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,22 +364,55 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Calificaciones"));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Nota Primer Parcial");
 
+        txtNota1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNota1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota1KeyTyped(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("Nota Segundo Parcial");
 
+        txtNota2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNota2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota2KeyTyped(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Nota Tercer Parcial");
 
+        txtNota3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNota3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota3KeyTyped(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setText("Nota Cuarto Parcial");
+
+        txtNota4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNota4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNota4KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -358,7 +437,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(38, 38, 38)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNota1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,11 +449,13 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                     .addComponent(txtNota3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(txtNota4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(117, 28));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -383,6 +464,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(117, 28));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -391,6 +473,7 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(117, 28));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -403,24 +486,24 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(31, 31, 31)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -442,9 +525,9 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Calificaciones", jPanel2);
@@ -475,10 +558,12 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
             tabGeneral.setSelectedIndex(1);
+            this.accion = "guardar";
+            btnGuardar.setText("Guardar");
         } else {
             this.mensajeError("Seleccione 1 alumno para calificar.");
         }
-        
+
     }//GEN-LAST:event_btnCalificarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -520,7 +605,6 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Las notas ingresadas no deben ser mayor a 100, es obligatorio.", "Sistema Escolar", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         if (this.accion.equals("editar")) {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
@@ -536,14 +620,20 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         } else {
             ProfesoresCalificacion item1 = (ProfesoresCalificacion) cboProfesor.getSelectedItem();
             AsignaturaCalificacion item2 = (AsignaturaCalificacion) cboAsignatura.getSelectedItem();
-            respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, Integer.parseInt(lblIdAlumno.getText()), item2.getId(), item1.getId());
-            if (respuesta.equals("OK")) {
-                this.limpiar();
-                this.listarAlumnosCalif();
-                this.listarAlumnos();
-                tabGeneral.setEnabledAt(1, false);
-                tabGeneral.setEnabledAt(0, true);
-                tabGeneral.setSelectedIndex(0);
+            int AlumnoId = Integer.parseInt(lblIdAlumno.getText());
+            boolean banderinResp = this.validarAlumnoCalificado(AlumnoId, item2.getId());
+            if (banderinResp) {
+                this.mensajeError("El Alumno ya fue calificado para esa clase");
+            } else {
+                respuesta = this.CONTROL.insertar(nota1, nota2, nota3, nota4, AlumnoId, item2.getId(), item1.getId());
+                if (respuesta.equals("OK")) {
+                    this.limpiar();
+                    this.listarAlumnosCalif();
+                    this.listarAlumnos();
+                    tabGeneral.setEnabledAt(1, false);
+                    tabGeneral.setEnabledAt(0, true);
+                    tabGeneral.setSelectedIndex(0);
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -593,6 +683,54 @@ public class frmPrimerGrado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.limpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNota1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota1KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota1KeyTyped
+
+    private void txtNota3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota3KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota3KeyTyped
+
+    private void txtNota2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota2KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota2KeyTyped
+
+    private void txtNota4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNota4KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo numeros");
+        }
+    }//GEN-LAST:event_txtNota4KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
