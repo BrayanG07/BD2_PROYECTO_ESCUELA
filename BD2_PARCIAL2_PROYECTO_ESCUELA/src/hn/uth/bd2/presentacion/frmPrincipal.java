@@ -19,7 +19,7 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal() {
         initComponents();
-        //this.cargarOcionesMenu();
+//        this.cargarOcionesMenu();
     }
 
     private void cargarOcionesMenu() {
@@ -87,6 +87,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAlumnos = new javax.swing.JMenu();
         mnuMatricula = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         mnuGrados = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -108,9 +109,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         mnuProfesores = new javax.swing.JMenu();
+        jMenuItem18 = new javax.swing.JMenuItem();
         mnuAsignaturas = new javax.swing.JMenu();
         mnuAsignaciones = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         mnuAjustes = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
 
@@ -133,6 +136,14 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         mnuMatricula.add(jMenuItem16);
+
+        jMenuItem17.setText("Año Escolar");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        mnuMatricula.add(jMenuItem17);
 
         menuBar.add(mnuMatricula);
 
@@ -271,6 +282,15 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuProfesores.setText(" Profesores");
         mnuProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem18.setText("Profesores");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        mnuProfesores.add(jMenuItem18);
+
         menuBar.add(mnuProfesores);
 
         mnuAsignaturas.setText("Asignaturas");
@@ -280,13 +300,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAsignaciones.setText("Asignaciones");
         mnuAsignaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem2.setText("Asignar Clases");
+        jMenuItem2.setText("Asignar Clases Profesor");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         mnuAsignaciones.add(jMenuItem2);
+
+        jMenuItem19.setText("Asignar Clases Grado");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        mnuAsignaciones.add(jMenuItem19);
 
         menuBar.add(mnuAsignaciones);
 
@@ -428,6 +456,27 @@ public class frmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+        FrmAnioEscolar frm = new FrmAnioEscolar();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        Profesores frm = new Profesores();
+        //escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+        FrmAsignaturasGrado frm = new FrmAsignaturasGrado();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,6 +528,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
