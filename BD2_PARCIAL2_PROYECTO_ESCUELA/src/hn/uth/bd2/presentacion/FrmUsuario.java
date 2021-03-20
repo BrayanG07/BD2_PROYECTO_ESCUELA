@@ -110,7 +110,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cboRoles = new javax.swing.JComboBox<>();
+        cboRoles = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
@@ -128,8 +128,15 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Usuarios");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado"));
+        tabGeneral.setBackground(new java.awt.Color(255, 255, 255));
+        tabGeneral.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        tablaListado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -156,10 +163,13 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "General", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Usuario");
 
+        btnBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +178,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.setPreferredSize(new java.awt.Dimension(85, 28));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +187,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -240,15 +252,32 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         tabGeneral.addTab("Listado", jPanel2);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Registrar"));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Usuario");
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Password");
 
+        cboRoles.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Roles");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Confirmacion Password");
+
+        txtUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtPassword.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtConfirmacion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtIdUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -270,7 +299,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,8 +324,10 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +336,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -313,6 +345,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -326,23 +359,23 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGap(58, 58, 58))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -363,7 +396,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Mantenimiento", jPanel1);

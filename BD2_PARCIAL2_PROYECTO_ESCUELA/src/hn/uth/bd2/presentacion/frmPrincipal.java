@@ -123,11 +123,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.setPreferredSize(new java.awt.Dimension(199, 35));
 
         mnuAlumnos.setText("Alumnos");
-        mnuAlumnos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuAlumnos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         menuBar.add(mnuAlumnos);
 
         mnuMatricula.setText("Matricula");
-        mnuMatricula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuMatricula.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jMenuItem16.setText("Matricula");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.add(mnuMatricula);
 
         mnuGrados.setText("Grados");
-        mnuGrados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuGrados.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         mnuGrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuGradosActionPerformed(evt);
@@ -281,7 +281,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.add(mnuGrados);
 
         mnuProfesores.setText(" Profesores");
-        mnuProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuProfesores.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jMenuItem18.setText("Profesores");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
@@ -294,13 +294,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.add(mnuProfesores);
 
         mnuAsignaturas.setText("Asignaturas");
-        mnuAsignaturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuAsignaturas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         menuBar.add(mnuAsignaturas);
 
         mnuAsignaciones.setText("Asignaciones");
-        mnuAsignaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuAsignaciones.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jMenuItem2.setText("Asignar Clases Profesor");
+        jMenuItem2.setText("Asignar Clases");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -319,7 +319,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuBar.add(mnuAsignaciones);
 
         mnuAjustes.setText("Ajustes");
-        mnuAjustes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mnuAjustes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jMenuItem15.setText("Usuario");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -502,6 +502,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

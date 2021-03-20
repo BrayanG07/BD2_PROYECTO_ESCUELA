@@ -16,7 +16,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alumnos"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
         </Menu>
@@ -24,7 +24,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Matricula"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -50,7 +50,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Grados"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
           <Events>
@@ -206,7 +206,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" Profesores"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -224,7 +224,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Asignaturas"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
         </Menu>
@@ -232,13 +232,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Asignaciones"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Asignar Clases Profesor"/>
+                <Property name="text" type="java.lang.String" value="Asignar Clases"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -258,7 +258,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajustes"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Arial" size="14" style="1"/>
             </Property>
           </Properties>
           <SubComponents>

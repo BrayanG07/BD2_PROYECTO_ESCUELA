@@ -152,9 +152,9 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         cboGrado = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtFecha = new com.toedter.calendar.JDateChooser();
         txtIdMatricula = new javax.swing.JTextField();
         txtIdAlumno = new javax.swing.JTextField();
+        txtFecha = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -166,10 +166,20 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("FrmMatricula");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
+        tabGeneral.setBackground(new java.awt.Color(255, 255, 255));
+        tabGeneral.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "General", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Rtn:");
 
+        txtBusqueda.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        btnBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +187,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
             }
         });
 
+        btnNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,6 +195,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,8 +234,10 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado"));
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        tablaListado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -259,7 +273,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,29 +287,51 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
 
         tabGeneral.addTab("Listado", jPanel1);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "General", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nombre");
 
+        txtNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtApellido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Apellido");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("RTN");
 
+        txtRtn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Direccion");
 
+        txtTelefono.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("Telefono");
 
         txtDireccion.setColumns(20);
+        txtDireccion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtDireccion.setRows(5);
         jScrollPane2.setViewportView(txtDireccion);
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Año Escolar");
 
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setText("Grado");
 
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("Fecha");
 
-        txtFecha.setDateFormatString("yyyy-MM-dd");
+        txtIdMatricula.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        txtIdAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -314,7 +350,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                                 .addGap(0, 28, Short.MAX_VALUE)
                                 .addComponent(jLabel2))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap(45, Short.MAX_VALUE)
+                                .addContainerGap(50, Short.MAX_VALUE)
                                 .addComponent(jLabel4)))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -324,7 +360,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(txtRtn))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 23, Short.MAX_VALUE)
+                        .addGap(0, 24, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8))
@@ -338,15 +374,14 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel5))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                        .addComponent(txtApellido)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(txtApellido)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtIdMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -391,8 +426,10 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                 .addGap(0, 5, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +438,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -409,6 +447,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(85, 28));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -422,13 +461,13 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(88, 88, 88)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(42, 42, 42)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +489,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,7 +498,7 @@ public class FrmMatricula extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Matricula", jPanel2);
