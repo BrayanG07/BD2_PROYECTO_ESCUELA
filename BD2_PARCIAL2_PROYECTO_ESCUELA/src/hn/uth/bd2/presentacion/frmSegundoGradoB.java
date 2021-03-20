@@ -131,9 +131,9 @@ public class frmSegundoGradoB extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtNombreAlumno = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cboProfesor = new javax.swing.JComboBox<String>();
+        cboProfesor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cboAsignatura = new javax.swing.JComboBox<String>();
+        cboAsignatura = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         lblIdAlumno = new javax.swing.JLabel();
         txtIdCalificacion = new javax.swing.JTextField();
@@ -499,12 +499,12 @@ public class frmSegundoGradoB extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -528,7 +528,7 @@ public class frmSegundoGradoB extends javax.swing.JInternalFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Calificaciones", jPanel2);

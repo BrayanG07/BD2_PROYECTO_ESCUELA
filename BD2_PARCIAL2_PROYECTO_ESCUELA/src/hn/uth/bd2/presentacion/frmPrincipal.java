@@ -19,7 +19,8 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal() {
         initComponents();
-//        this.cargarOcionesMenu();
+        this.setLocationRelativeTo(null);
+        //this.cargarOcionesMenu();
     }
 
     private void cargarOcionesMenu() {
@@ -117,6 +118,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         mnuAjustes = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +132,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuMatricula.setText("Matricula");
         mnuMatricula.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
+        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/prueba.png"))); // NOI18N
         jMenuItem16.setText("Matricula");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +143,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnuMatricula.add(jMenuItem16);
 
+        jMenuItem17.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/calendar.png"))); // NOI18N
         jMenuItem17.setText("Año Escolar");
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +164,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenuItem1.setText("Preparatoria");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,8 +175,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnuGrados.add(jMenuItem1);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu1.setText("Primer Grado");
+        jMenu1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem3.setText("Seccion A");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +190,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem4.setText("Seccion B");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,8 +203,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuGrados.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu2.setText("Segundo Grado");
+        jMenu2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem5.setText("Seccion A");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +218,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem6.setText("Seccion B");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,8 +231,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuGrados.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu3.setText("Tercer Grado");
+        jMenu3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem7.setText("Seccion A");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +246,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem7);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem8.setText("Seccion B");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,8 +259,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuGrados.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu4.setText("Cuarto Grado");
+        jMenu4.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem9.setText("Seccion A");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,6 +274,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem9);
 
+        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem10.setText("Seccion B");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,8 +287,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuGrados.add(jMenu4);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu5.setText("Quinto Grado");
+        jMenu5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem11.setText("Seccion A");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +302,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem11);
 
+        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem12.setText("Seccion B");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,8 +315,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuGrados.add(jMenu5);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom.png"))); // NOI18N
         jMenu6.setText("Sexto Grado");
+        jMenu6.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
+        jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem13.setText("Seccion A");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +330,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem13);
 
+        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/classroom (3).png"))); // NOI18N
         jMenuItem14.setText("Seccion B");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,6 +348,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuProfesores.setText(" Profesores");
         mnuProfesores.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
+        jMenuItem18.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/teacher.png"))); // NOI18N
         jMenuItem18.setText("Profesores");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,6 +364,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAsignaturas.setText("Asignaturas");
         mnuAsignaturas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
+        jMenuItem20.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/books.png"))); // NOI18N
         jMenuItem20.setText("Asignaturas");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,7 +380,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAsignaciones.setText("Asignaciones");
         mnuAsignaciones.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jMenuItem2.setText("Asignar Clases");
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/teacher (1).png"))); // NOI18N
+        jMenuItem2.setText("Asignar Clases Profesor");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -323,6 +391,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnuAsignaciones.add(jMenuItem2);
 
+        jMenuItem19.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/teacher3.png"))); // NOI18N
         jMenuItem19.setText("Asignar Clases Grado");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +407,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAjustes.setText("Ajustes");
         mnuAjustes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
+        jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/customer.png"))); // NOI18N
         jMenuItem15.setText("Usuario");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,6 +419,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuAjustes.add(jMenuItem15);
 
         menuBar.add(mnuAjustes);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hn/uth/bd2/imagenes/boton-salir-a-la-aplicacion.png"))); // NOI18N
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        menuBar.add(jMenu7);
 
         setJMenuBar(menuBar);
 
@@ -505,6 +587,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenu7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -549,6 +636,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;

@@ -35,10 +35,11 @@ public class Asignaturas extends javax.swing.JFrame {
         txtfefi.setText("");
     }
 
-    public void insertar() {
+     public boolean insertar() {
+        boolean banderin = true; 
         try {
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call ASIGNATURA_DB.INSERTAR_ASIGNATURA(?,?,?,?,?)";
+            String sql = "call PARAMETROS_APP.SP_INSERTAR_ASIGNATURA(?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
 
             ps.setString(1, this.txtnombre.getText());
@@ -46,13 +47,18 @@ public class Asignaturas extends javax.swing.JFrame {
             ps.setString(3, (String) this.cbcreditos.getSelectedItem());
             ps.setString(4, this.txtfeini.getText());
             ps.setString(5, this.txtfefi.getText());
+            ps.registerOutParameter(6, OracleTypes.VARCHAR);
             ps.execute();
+            if (ps.getString(6) != null) {
+                JOptionPane.showMessageDialog(null, ps.getString(6), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+                banderin = false;
+            }
             ps.close();
             cn.close();
-            JOptionPane.showMessageDialog(null, "REGISTRO INGRESADO CORRECTAMENTE", "FELICIDADES", 1);
         } catch (SQLException e) {
             System.out.println("Error: " + e);
         }
+        return banderin;
     }
 
     public void BuscarID(int busqueda) {
@@ -246,13 +252,14 @@ public class Asignaturas extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -434,11 +441,17 @@ public class Asignaturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        insertar();
+        if (insertar()) {
+            JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CORRECTAMENTE", "FELICIDADES", 1);
+            this.limpiar();
+        }else {
+            txtnombre.requestFocus();
+            return;
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        actualizar();
+        this.actualizar();
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed

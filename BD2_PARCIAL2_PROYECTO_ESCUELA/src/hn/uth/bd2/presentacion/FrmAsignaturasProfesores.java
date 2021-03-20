@@ -181,7 +181,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNombreProfesor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cboGrado = new javax.swing.JComboBox<String>();
+        cboGrado = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAsignaturas = new javax.swing.JTable();
@@ -268,6 +268,7 @@ public class FrmAsignaturasProfesores extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        tablaListado.setBackground(new java.awt.Color(255, 255, 255));
         tablaListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         tablaPrincipal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N

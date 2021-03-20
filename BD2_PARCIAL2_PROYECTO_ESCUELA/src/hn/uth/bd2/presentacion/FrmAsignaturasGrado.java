@@ -175,10 +175,16 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Asignando Clases al grado");
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
+        tabGeneral.setBackground(new java.awt.Color(255, 255, 255));
+        tabGeneral.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        jLabel2.setText("Grador:");
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Grado:");
+
+        btnNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.setPreferredSize(new java.awt.Dimension(80, 28));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +193,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setPreferredSize(new java.awt.Dimension(80, 28));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +202,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnBuscar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.setPreferredSize(new java.awt.Dimension(80, 28));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -233,8 +241,10 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        tablaListado.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado"));
+        tablaListado.setBackground(new java.awt.Color(255, 255, 255));
+        tablaListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        tablaPrincipal.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -284,9 +294,13 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
 
         tabGeneral.addTab("Listado", jPanel1);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Grado:");
+
+        cboGrado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -309,8 +323,10 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignaciones"));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        tablaAsignaturas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -326,6 +342,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaAsignaturas);
 
+        tablaAsignando.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tablaAsignando.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -341,6 +358,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tablaAsignando);
 
+        btnFlecha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnFlecha.setText("<---");
         btnFlecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,6 +366,7 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnRemueve.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnRemueve.setText("X");
         btnRemueve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,8 +406,10 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(90, 29));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -397,9 +418,11 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(90, 29));
 
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(90, 29));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -413,13 +436,13 @@ public class FrmAsignaturasGrado extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addGap(140, 140, 140)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

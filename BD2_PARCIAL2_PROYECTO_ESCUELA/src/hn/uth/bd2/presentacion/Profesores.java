@@ -45,7 +45,6 @@ public class Profesores extends javax.swing.JFrame {
     public boolean insertar() {
         boolean banderin = true;    
         try {
-            //
             Connection cn = Conexion3.ObtenerConexion();
             String sql = "call PARAMETROS_APP.SP_INSERTAR_PROFESOR(?,?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
@@ -103,6 +102,7 @@ public class Profesores extends javax.swing.JFrame {
             ps.execute();
             ps.close();
             cn.close();
+            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "FELICIDADES", 1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -506,7 +506,7 @@ public class Profesores extends javax.swing.JFrame {
     private void jborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jborrarActionPerformed
         // TODO add your handling code here:
         if (insertar()) {
-            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "FELICIDADES", 1);
+            JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CORRECTAMENTE", "FELICIDADES", 1);
             this.limpiar();
         }else {
             jrtn.requestFocus();
