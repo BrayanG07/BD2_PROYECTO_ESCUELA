@@ -6,24 +6,27 @@
 package hn.uth.bd2.presentacion;
 
 import hn.uth.bd2.objetos.Conexion3;
-import java.sql.*;;
+import java.sql.*;
+;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleTypes;
 import javax.swing.JOptionPane;
 
+
+
 public class Asignaturas extends javax.swing.JFrame {
+
     Connection cn;
     Object asignaturas[] = new Object[7];
     DefaultTableModel modelo;
     ResultSet rs;
 
-    
     public Asignaturas() {
         initComponents();
-        modelo = (DefaultTableModel)tabla.getModel();
+        modelo = (DefaultTableModel) tabla.getModel();
     }
 
-        public void limpiar(){
+    public void limpiar() {
         txtid.setText("");
         txtnombre.setText("");
         txtdescripcion.setText("");
@@ -31,14 +34,13 @@ public class Asignaturas extends javax.swing.JFrame {
         txtfeini.setText("");
         txtfefi.setText("");
     }
-     
-   
-    public void insertar(){
-        try{
+
+    public void insertar() {
+        try {
             Connection cn = Conexion3.ObtenerConexion();
             String sql = "call ASIGNATURA_DB.INSERTAR_ASIGNATURA(?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
-            
+
             ps.setString(1, this.txtnombre.getText());
             ps.setString(2, this.txtdescripcion.getText());
             ps.setString(3, (String) this.cbcreditos.getSelectedItem());
@@ -47,47 +49,44 @@ public class Asignaturas extends javax.swing.JFrame {
             ps.execute();
             ps.close();
             cn.close();
-            JOptionPane.showMessageDialog(null,"REGISTRO INGRESADO CORRECTAMENTE","FELICIDADES",1);
-        }catch(SQLException e){
-            System.out.println("Error: "+e);
+            JOptionPane.showMessageDialog(null, "REGISTRO INGRESADO CORRECTAMENTE", "FELICIDADES", 1);
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
         }
     }
-    
 
-    public void BuscarID(int busqueda){
-        try{
+    public void BuscarID(int busqueda) {
+        try {
             Connection cn = Conexion3.ObtenerConexion();
             String sql = "call ASIGNATURA_DB.BUSCAR_ID_ASIGNATURA(?,?)";
             CallableStatement ps = cn.prepareCall(sql);
-            ps.setInt(1,busqueda);
+            ps.setInt(1, busqueda);
             ps.registerOutParameter(2, OracleTypes.CURSOR);
             ps.execute();
-            rs = (ResultSet)ps.getObject(2);
-            while(rs.next()){
-                
-             txtnombre.setText(rs.getString("NOMBRE"));
-             txtdescripcion.setText(rs.getString("DESCRIPCION"));
-             cbcreditos.setSelectedItem(rs.getString("CREDITOS"));
-             txtfeini.setText(rs.getString("HORA_INICIO"));
-             txtfefi.setText(rs.getString("HORA_FIN"));
-          
+            rs = (ResultSet) ps.getObject(2);
+            while (rs.next()) {
+
+                txtnombre.setText(rs.getString("NOMBRE"));
+                txtdescripcion.setText(rs.getString("DESCRIPCION"));
+                cbcreditos.setSelectedItem(rs.getString("CREDITOS"));
+                txtfeini.setText(rs.getString("HORA_INICIO"));
+                txtfefi.setText(rs.getString("HORA_FIN"));
+
             }
-             ps.close();
-             cn.close();
-            
-        }catch(SQLException e){
-            System.out.println("Error: "+e);
+            ps.close();
+            cn.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
         }
-        }
-        
-        
-        
-    public void actualizar(){
-        try{
+    }
+
+    public void actualizar() {
+        try {
             Connection cn = Conexion3.ObtenerConexion();
             String sql = "call ASIGNATURA_DB.ACTUALIZAR_ASIGNATURA(?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
-            
+
             ps.setInt(1, Integer.parseInt(this.txtid.getText()));
             ps.setString(2, this.txtnombre.getText());
             ps.setString(3, this.txtdescripcion.getText());
@@ -97,41 +96,39 @@ public class Asignaturas extends javax.swing.JFrame {
             ps.execute();
             ps.close();
             cn.close();
-            JOptionPane.showMessageDialog(null,"REGISTRO ACTUALIZADO CORRECTAMENTE","FELICIDADES",1);
-        }catch(SQLException e){
-            System.out.println("Error: "+e);
+            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "FELICIDADES", 1);
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
         }
     }
-    
-        public void Buscar(){
-        try{
 
-            Connection cn = Conexion3.ObtenerConexion(); 
+    public void Buscar() {
+        try {
+
+            Connection cn = Conexion3.ObtenerConexion();
             String sql = "call ASIGNATURA_DB.BUSCAR_ASIGNATURAS(?)";
-            
-            CallableStatement ps = cn.prepareCall(sql); 
+
+            CallableStatement ps = cn.prepareCall(sql);
             ps.registerOutParameter(1, OracleTypes.CURSOR);
             ps.execute();
-            rs = (ResultSet)ps.getObject(1);
-            while(rs.next()){
-             asignaturas[0] = (rs.getInt("ID_ASIGNATURA"));
-             asignaturas[1] = (rs.getString("NOMBRE"));
-             asignaturas[2] = (rs.getString("DESCRIPCION"));
-             asignaturas[3] = (rs.getString("CREDITOS"));
-             asignaturas[4] = (rs.getString("HORA_INICIO"));
-             asignaturas[5] = (rs.getString("HORA_FIN"));
-             modelo.addRow(asignaturas);
+            rs = (ResultSet) ps.getObject(1);
+            while (rs.next()) {
+                asignaturas[0] = (rs.getInt("ID_ASIGNATURA"));
+                asignaturas[1] = (rs.getString("NOMBRE"));
+                asignaturas[2] = (rs.getString("DESCRIPCION"));
+                asignaturas[3] = (rs.getString("CREDITOS"));
+                asignaturas[4] = (rs.getString("HORA_INICIO"));
+                asignaturas[5] = (rs.getString("HORA_FIN"));
+                modelo.addRow(asignaturas);
             }
-             rs.close(); 
-             ps.close();
-             cn.close(); 
-        }catch(SQLException e){
-            System.out.println("Error: "+e);
-        } 
+            rs.close();
+            ps.close();
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
     }
 
-        
-        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -164,12 +161,13 @@ public class Asignaturas extends javax.swing.JFrame {
         btnlim = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.setBackground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -181,7 +179,7 @@ public class Asignaturas extends javax.swing.JFrame {
         jLabel5.setText("NOMBRES:");
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("DIRECCIÓN:");
+        jLabel8.setText("DESCRIPCION:");
 
         txtdescripcion.setColumns(20);
         txtdescripcion.setRows(5);
@@ -242,11 +240,11 @@ public class Asignaturas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
+                                .addGap(45, 45, 45)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -264,7 +262,7 @@ public class Asignaturas extends javax.swing.JFrame {
                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtfeini, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(34, 34, 34)
@@ -457,7 +455,7 @@ public class Asignaturas extends javax.swing.JFrame {
 
     private void btnlimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimActionPerformed
         int fila = tabla.getRowCount();
-        for(int i=fila-1; i>=0;i--){
+        for (int i = fila - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }//GEN-LAST:event_btnlimActionPerformed

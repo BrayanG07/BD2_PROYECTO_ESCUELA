@@ -46,7 +46,7 @@ public class Profesores extends javax.swing.JFrame {
         try {
             //
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call PAC_INSERTAR_PROFESOR.INSERTAR_PROFESOR(?,?,?,?,?,?)";
+            String sql = "call PROFESOR_DB.INSERTAR_PROFESOR(?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
 
             ps.setString(1, this.jnombre.getText());
@@ -69,7 +69,7 @@ public class Profesores extends javax.swing.JFrame {
     public void borrar() {
         try {
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call PAC_BORRAR_PROFE.BORRAR_PROFE(?)";
+            String sql = "call PROFESOR_DB.BORRAR_PROFE(?)";
             CallableStatement ps = cn.prepareCall(sql);
 
             ps.setInt(1, Integer.parseInt(this.jidprofesor.getText()));
@@ -85,7 +85,7 @@ public class Profesores extends javax.swing.JFrame {
     public void actualizar() {
         try {
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call PAC_ACTUALIZAR_PROFE.ACTUALIZAR_PROFE(?,?,?,?,?,?,?)";
+            String sql = "call PROFESOR_DB.ACTUALIZAR_PROFE(?,?,?,?,?,?,?)";
             CallableStatement ps = cn.prepareCall(sql);
 
             ps.setInt(1, Integer.parseInt(this.jidprofesor.getText()));
@@ -109,7 +109,7 @@ public class Profesores extends javax.swing.JFrame {
         try {
             //
             Connection cn = Conexion3.ObtenerConexion(); //se quita
-            String sql = "call BUSCAR_PROFESORES(?)";
+            String sql = "call PROFESOR_DB.BUSCAR_PROFESORES(?)";
             //
 
             CallableStatement ps = cn.prepareCall(sql); //borrar
@@ -138,7 +138,7 @@ public class Profesores extends javax.swing.JFrame {
     public void BuscarID(int busqueda) {
         try {
             Connection cn = Conexion3.ObtenerConexion();
-            String sql = "call BUS_ID_PROFESOR(?,?)";
+            String sql = "call PROFESOR_DB.BUS_ID_PROFESOR(?,?)";
             CallableStatement ps = cn.prepareCall(sql);
             ps.setInt(1, busqueda);
             ps.registerOutParameter(2, OracleTypes.CURSOR);
@@ -202,7 +202,7 @@ public class Profesores extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 

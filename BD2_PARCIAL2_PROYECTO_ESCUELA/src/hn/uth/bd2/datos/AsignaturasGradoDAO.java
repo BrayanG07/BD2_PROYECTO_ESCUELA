@@ -33,18 +33,17 @@ public class AsignaturasGradoDAO {
     public boolean insertarAsignaturaGrado(int idGrado, int idAsignatura) {
         respuesta = false;
         try {
-            insertando = CON.conectar().prepareCall("{call PARAMETROS_APP.SP_INSERTAR_CLASES_GRADO(?,?,?,?)}");
+            insertando = CON.conectar().prepareCall("{call PARAMETROS_APP.SP_INSERTAR_CLASES_GRADO(?,?,?)}");
             insertando.setInt(1, idGrado);
             insertando.setInt(2, idAsignatura);
-            insertando.registerOutParameter(3, OracleTypes.INTEGER);
-            insertando.registerOutParameter(4, OracleTypes.VARCHAR);
+            insertando.registerOutParameter(3, OracleTypes.VARCHAR);
 
             insertando.execute();
             respuesta = true;
 
-            if (insertando.getInt(3) == 1) {
+            if (insertando.getString(3) != null) {
                 respuesta = false;
-                JOptionPane.showMessageDialog(null, insertando.getString(4), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, insertando.getString(3), "Sistema Escolar", JOptionPane.ERROR_MESSAGE);
             }
 
             insertando.close();
