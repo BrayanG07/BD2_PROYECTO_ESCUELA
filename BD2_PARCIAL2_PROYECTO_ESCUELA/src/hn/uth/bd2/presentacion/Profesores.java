@@ -30,6 +30,7 @@ public class Profesores extends javax.swing.JFrame {
     public Profesores() {
         initComponents();
         modelo = (DefaultTableModel) tabla.getModel();
+        this.setLocationRelativeTo(null);
     }
 
     public void limpiar() {
